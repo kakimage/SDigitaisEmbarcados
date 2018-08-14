@@ -15,10 +15,21 @@
 #include "LPC17xx.h"
 #include <stdint.h>
 
+void delay (void)
+{
+	uint32_t delay;
+	  for(delay = 0; delay < 1000000; delay++) {
+       __asm("NOP");
+	
+    }
+}
 
 int main() {
-  
-  SystemInit();
-  
-	
+	SystemInit();
+	LPC_GPIO4->FIODIR |= (1 << LED4_PIN);
+  	LPC_GPIO4->FIOSET = (1 << LED4_PIN);
+  	delay();
+  	LPC_GPIO4->FIOCLR = (1 << LED4_PIN);
+  	delay();	
 }
+
