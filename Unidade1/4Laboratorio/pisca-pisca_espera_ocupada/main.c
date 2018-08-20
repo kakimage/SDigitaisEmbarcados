@@ -15,21 +15,32 @@
 #include "LPC17xx.h"
 #include <stdint.h>
 
-void delay (void)
-{
-	uint32_t delay;
-	  for(delay = 0; delay < 1000000; delay++) {
-       __asm("NOP");
-	
-    }
-}
+#define LED4_PIN (29)
+
+
+volatile uint32_t delay;
+
 
 int main() {
-	SystemInit();
-	LPC_GPIO4->FIODIR |= (1 << LED4_PIN);
-  	LPC_GPIO4->FIOSET = (1 << LED4_PIN);
-  	delay();
-  	LPC_GPIO4->FIOCLR = (1 << LED4_PIN);
-  	delay();	
+  
+  SystemInit();
+  
+    // Setup P1.23 as output
+  LPC_GPIO1->FIODIR |= (1 << LED4_PIN);
+    
+  for(;;) {
+    for(delay = 0; delay < 1000000; delay++) {
+       __asm("NOP");
+    }
+    
+    // Turn LED ON
+    LPC_GPIO1->FIOSET = (1 << LED4_PIN);
+    
+    for(uint32_t delay = 0; delay < 1000000; delay++) {
+       __asm("NOP");
+    }
+    
+    // Turn LED OFF
+    LPC_GPIO1->FIOCLR = (1 << LED4_PIN);
+  }
 }
-

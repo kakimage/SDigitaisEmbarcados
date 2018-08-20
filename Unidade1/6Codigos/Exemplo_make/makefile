@@ -1,9 +1,12 @@
 
 CC = gcc
-FLAGS = -Wall -pedantic     -O4
+FLAGS = -Wall -pedantic  -g   
 
 app: main.o teste.o outro.o
 	$(CC) main.o teste.o outro.o -o app
+
+main.o: teste.h outro.h
+	$(CC) main.c $(FLAGS) -c
 
 outro.o: outro.c outro.h
 	$(CC) outro.c $(FLAGS) -c
