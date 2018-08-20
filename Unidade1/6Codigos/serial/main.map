@@ -1,0 +1,372 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+rom              0x0000000000000000 0x0000000000080000 xr
+ram              0x0000000010000000 0x0000000000008000 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD startup_LPC17xx.o
+LOAD core_cm3.o
+LOAD system_LPC17xx.o
+LOAD main.o
+LOAD uart.o
+START GROUP
+LOAD /usr/lib/gcc/arm-none-eabi/4.8.2/armv7-m/libgcc.a
+LOAD /usr/lib/gcc/arm-none-eabi/4.8.2/../../../arm-none-eabi/lib/armv7-m/libc.a
+END GROUP
+                0x0000000010008000                PROVIDE (__cs3_stack, (__cs3_region_start_ram + __cs3_region_size_ram))
+                0x0000000020007ff8                PROVIDE (__cs3_stack_size, ((__cs3_region_start_ram + __cs3_region_size_ram) - _end))
+                0x0000000010000008                PROVIDE (__cs3_heap_start, _end)
+                0x0000000010008000                PROVIDE (__cs3_heap_end, (__cs3_region_start_ram + __cs3_region_size_ram))
+
+.text           0x0000000000000000      0xe40
+ CREATE_OBJECT_SYMBOLS
+                0x0000000000000000                __cs3_region_start_rom = .
+ *(.cs3.region-head.rom)
+                0x0000000000000000                __cs3_interrupt_vector = __cs3_interrupt_vector_cortex_m
+ *(.cs3.interrupt_vector)
+ .cs3.interrupt_vector
+                0x0000000000000000       0xc4 startup_LPC17xx.o
+                0x0000000000000000                __cs3_interrupt_vector_cortex_m
+                0x0000000000000001                ASSERT ((. != __cs3_interrupt_vector_cortex_m), No interrupt vector)
+ *(.rom)
+ *(.rom.b)
+                0x00000000000000c4                __cs3_reset = __cs3_reset_cortex_m
+ *(.cs3.reset)
+ .cs3.reset     0x00000000000000c4       0x10 startup_LPC17xx.o
+                0x00000000000000c4                __cs3_reset_cortex_m
+                0x0000000000000001                ASSERT ((. != __cs3_reset), No reset code)
+ *(.text .text.* .gnu.linkonce.t.*)
+ .text          0x00000000000000d4       0x14 startup_LPC17xx.o
+                0x00000000000000d4                NMI_Handler
+                0x00000000000000d6                HardFault_Handler
+                0x00000000000000d8                MemManage_Handler
+                0x00000000000000da                BusFault_Handler
+                0x00000000000000dc                UsageFault_Handler
+                0x00000000000000de                SVC_Handler
+                0x00000000000000e0                DebugMon_Handler
+                0x00000000000000e2                PendSV_Handler
+                0x00000000000000e4                SysTick_Handler
+                0x00000000000000e6                TIMER2_IRQHandler
+                0x00000000000000e6                RIT_IRQHandler
+                0x00000000000000e6                I2C0_IRQHandler
+                0x00000000000000e6                PWM1_IRQHandler
+                0x00000000000000e6                I2C1_IRQHandler
+                0x00000000000000e6                EINT2_IRQHandler
+                0x00000000000000e6                UART1_IRQHandler
+                0x00000000000000e6                EINT3_IRQHandler
+                0x00000000000000e6                TIMER3_IRQHandler
+                0x00000000000000e6                UART0_IRQHandler
+                0x00000000000000e6                PLL0_IRQHandler
+                0x00000000000000e6                CAN_IRQHandler
+                0x00000000000000e6                PLL1_IRQHandler
+                0x00000000000000e6                SSP0_IRQHandler
+                0x00000000000000e6                I2S_IRQHandler
+                0x00000000000000e6                I2C2_IRQHandler
+                0x00000000000000e6                RTC_IRQHandler
+                0x00000000000000e6                TIMER0_IRQHandler
+                0x00000000000000e6                SPI_IRQHandler
+                0x00000000000000e6                EINT1_IRQHandler
+                0x00000000000000e6                TIMER1_IRQHandler
+                0x00000000000000e6                UART2_IRQHandler
+                0x00000000000000e6                Default_Handler
+                0x00000000000000e6                ADC_IRQHandler
+                0x00000000000000e6                SSP1_IRQHandler
+                0x00000000000000e6                USB_IRQHandler
+                0x00000000000000e6                BOD_IRQHandler
+                0x00000000000000e6                WDT_IRQHandler
+                0x00000000000000e6                QEI_IRQHandler
+                0x00000000000000e6                EINT0_IRQHandler
+                0x00000000000000e6                DMA_IRQHandler
+                0x00000000000000e6                UART3_IRQHandler
+                0x00000000000000e6                MCPWM_IRQHandler
+                0x00000000000000e6                ENET_IRQHandler
+ .text          0x00000000000000e8      0x280 core_cm3.o
+                0x00000000000000e8                __get_PSP
+                0x00000000000000f8                __set_PSP
+                0x0000000000000100                __get_MSP
+                0x0000000000000110                __set_MSP
+                0x0000000000000118                __get_BASEPRI
+                0x0000000000000138                __set_BASEPRI
+                0x0000000000000150                __get_PRIMASK
+                0x0000000000000170                __set_PRIMASK
+                0x0000000000000188                __get_FAULTMASK
+                0x00000000000001a8                __set_FAULTMASK
+                0x00000000000001c0                __get_CONTROL
+                0x00000000000001e0                __set_CONTROL
+                0x00000000000001f8                __REV
+                0x0000000000000218                __REV16
+                0x000000000000023c                __REVSH
+                0x0000000000000260                __RBIT
+                0x0000000000000284                __LDREXB
+                0x00000000000002a8                __LDREXH
+                0x00000000000002cc                __LDREXW
+                0x00000000000002f0                __STREXB
+                0x0000000000000318                __STREXH
+                0x0000000000000340                __STREXW
+ .text          0x0000000000000368      0x3d8 system_LPC17xx.o
+                0x0000000000000368                SystemCoreClockUpdate
+                0x0000000000000550                SystemInit
+ .text          0x0000000000000740       0x2c main.o
+                0x0000000000000740                main
+ .text          0x000000000000076c      0x69c uart.o
+                0x000000000000076c                UART0_Init
+                0x0000000000000868                UART1_Init
+                0x0000000000000988                UART2_Init
+                0x0000000000000a84                UART3_Init
+                0x0000000000000b80                UART0_Sendchar
+                0x0000000000000bb8                UART1_Sendchar
+                0x0000000000000bec                UART2_Sendchar
+                0x0000000000000c24                UART3_Sendchar
+                0x0000000000000c5c                UART0_Getchar
+                0x0000000000000c94                UART1_Getchar
+                0x0000000000000cc8                UART2_Getchar
+                0x0000000000000d00                UART3_Getchar
+                0x0000000000000d38                UART0_PrintString
+                0x0000000000000d6c                UART1_PrintString
+                0x0000000000000da0                UART2_PrintString
+                0x0000000000000dd4                UART3_PrintString
+ *(.plt)
+ *(.gnu.warning)
+ *(.glue_7t)
+ .glue_7t       0x0000000000000000        0x0 linker stubs
+ *(.glue_7)
+ .glue_7        0x0000000000000000        0x0 linker stubs
+ *(.vfp11_veneer)
+ .vfp11_veneer  0x0000000000000000        0x0 linker stubs
+ *(.rodata .rodata.* .gnu.linkonce.r.*)
+ .rodata        0x0000000000000e08       0x24 main.o
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+ .ARM.extab.cs3.reset
+                0x0000000000000e2c        0x0 startup_LPC17xx.o
+ *(.gcc_except_table)
+ *(.eh_frame_hdr)
+ *(.eh_frame)
+                0x0000000000000e2c                . = ALIGN (0x4)
+ *(.init)
+                0x0000000000000e2c                . = ALIGN (0x4)
+                0x0000000000000e2c                __preinit_array_start = .
+ *(.preinit_array)
+                0x0000000000000e2c                __preinit_array_end = .
+                0x0000000000000e2c                . = ALIGN (0x4)
+                0x0000000000000e2c                __init_array_start = .
+ *(SORT(.init_array.*))
+ *(.init_array)
+                0x0000000000000e2c                __init_array_end = .
+                0x0000000000000e2c                . = ALIGN (0x4)
+ *crtbegin.o(.ctors)
+ *(EXCLUDE_FILE(*crtend.o) .ctors)
+ *(SORT(.ctors.*))
+ *crtend.o(.ctors)
+                0x0000000000000e2c                . = ALIGN (0x4)
+ *(.fini)
+                0x0000000000000e2c                . = ALIGN (0x4)
+                0x0000000000000e2c                __fini_array_start = .
+ *(.fini_array)
+ *(SORT(.fini_array.*))
+                0x0000000000000e2c                __fini_array_end = .
+ *crtbegin.o(.dtors)
+ *(EXCLUDE_FILE(*crtend.o) .dtors)
+ *(SORT(.dtors.*))
+ *crtend.o(.dtors)
+                0x0000000000000e2c                . = ALIGN (0x4)
+                0x0000000000000e2c                __cs3_regions = .
+                0x0000000000000e2c        0x4 LONG 0x0
+                0x0000000000000e30        0x4 LONG 0xe48 __cs3_region_init_ram
+                0x0000000000000e34        0x4 LONG 0x10000000 __cs3_region_start_ram
+                0x0000000000000e38        0x4 LONG 0x8 __cs3_region_init_size_ram
+                0x0000000000000e3c        0x4 LONG 0x0 __cs3_region_zero_size_ram
+                0x0000000000000e40                __exidx_start = .
+
+.v4_bx          0x0000000000000e40        0x0
+ .v4_bx         0x0000000000000000        0x0 linker stubs
+
+.iplt           0x0000000000000e40        0x0
+ .iplt          0x0000000000000000        0x0 startup_LPC17xx.o
+
+.ARM.exidx      0x0000000000000e40        0x8
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+ .ARM.exidx.cs3.reset
+                0x0000000000000e40        0x8 startup_LPC17xx.o
+                0x0000000000000e48                __exidx_end = .
+
+.rel.dyn        0x0000000000000e48        0x0
+ .rel.iplt      0x0000000000000000        0x0 startup_LPC17xx.o
+
+.text.align     0x0000000000000e48        0x0
+                0x0000000000000e48                . = ALIGN (0x8)
+                0x0000000000000e48                _etext = .
+                0x0000000000080000                __cs3_region_size_rom = 0x80000
+                0x0000000000000001                __cs3_region_num = 0x1
+
+.data           0x0000000010000000        0x8 load address 0x0000000000000e48
+                0x0000000010000000                __cs3_region_start_ram = .
+ *(.cs3.region-head.ram)
+ *(.jcr)
+ *(.got.plt)
+ *(.got)
+ *(.shdata)
+ *(.data .data.* .gnu.linkonce.d.*)
+ .data          0x0000000010000000        0x0 startup_LPC17xx.o
+ .data          0x0000000010000000        0x0 core_cm3.o
+ .data          0x0000000010000000        0x4 system_LPC17xx.o
+                0x0000000010000000                SystemCoreClock
+ .data          0x0000000010000004        0x0 main.o
+ .data          0x0000000010000004        0x0 uart.o
+ *(.ram)
+                0x0000000010000008                . = ALIGN (0x8)
+ *fill*         0x0000000010000004        0x4 
+                0x0000000010000008                _edata = .
+
+.igot.plt       0x0000000010000008        0x0 load address 0x0000000000000e50
+ .igot.plt      0x0000000000000000        0x0 startup_LPC17xx.o
+
+.bss            0x0000000010000008        0x0 load address 0x0000000000000e50
+ *(.shbss)
+ *(.bss .bss.* .gnu.linkonce.b.*)
+ .bss           0x0000000010000008        0x0 startup_LPC17xx.o
+ .bss           0x0000000010000008        0x0 core_cm3.o
+ .bss           0x0000000010000008        0x0 system_LPC17xx.o
+ .bss           0x0000000010000008        0x0 main.o
+ .bss           0x0000000010000008        0x0 uart.o
+ *(COMMON)
+ *(.ram.b)
+                0x0000000010000008                . = ALIGN (0x8)
+                0x0000000010000008                _end = .
+                0x0000000010000008                __end = .
+
+.heap           0x0000000010000008     0x1000 load address 0x0000000000000e50
+ *(.heap)
+ .heap          0x0000000010000008     0x1000 startup_LPC17xx.o
+                0x0000000010000008                __cs3_heap_start
+                0x0000000010001008                __cs3_heap_end
+
+.stack          0x0000000010007f00      0x100
+ *(.stack)
+ .stack         0x0000000010007f00      0x100 startup_LPC17xx.o
+                0x0000000010007f00                __cs3_stack_mem
+                0x0000000000000e48                __cs3_region_init_ram = LOADADDR (.data)
+                0x0000000000000008                __cs3_region_init_size_ram = (_edata - __cs3_region_start_ram)
+                0x0000000000000000                __cs3_region_zero_size_ram = (_end - _edata)
+                0x0000000000008000                __cs3_region_size_ram = 0x8000
+                0x0000000000000001                __cs3_region_num = 0x1
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x0000000000000000       0x80
+ *(.debug_aranges)
+ .debug_aranges
+                0x0000000000000000       0x20 core_cm3.o
+ .debug_aranges
+                0x0000000000000020       0x20 system_LPC17xx.o
+ .debug_aranges
+                0x0000000000000040       0x20 main.o
+ .debug_aranges
+                0x0000000000000060       0x20 uart.o
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info     0x0000000000000000     0x14be
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x0000000000000000      0x52b core_cm3.o
+ .debug_info    0x000000000000052b      0x2ea system_LPC17xx.o
+ .debug_info    0x0000000000000815       0x99 main.o
+ .debug_info    0x00000000000008ae      0xc10 uart.o
+
+.debug_abbrev   0x0000000000000000      0x3c8
+ *(.debug_abbrev)
+ .debug_abbrev  0x0000000000000000       0xae core_cm3.o
+ .debug_abbrev  0x00000000000000ae       0xcb system_LPC17xx.o
+ .debug_abbrev  0x0000000000000179       0x5c main.o
+ .debug_abbrev  0x00000000000001d5      0x1f3 uart.o
+
+.debug_line     0x0000000000000000      0x3f6
+ *(.debug_line)
+ .debug_line    0x0000000000000000      0x115 core_cm3.o
+ .debug_line    0x0000000000000115      0x119 system_LPC17xx.o
+ .debug_line    0x000000000000022e       0x51 main.o
+ .debug_line    0x000000000000027f      0x177 uart.o
+
+.debug_frame    0x0000000000000000      0x494
+ *(.debug_frame)
+ .debug_frame   0x0000000000000000      0x248 core_cm3.o
+ .debug_frame   0x0000000000000248       0x40 system_LPC17xx.o
+ .debug_frame   0x0000000000000288       0x2c main.o
+ .debug_frame   0x00000000000002b4      0x1e0 uart.o
+
+.debug_str      0x0000000000000000      0x69f
+ *(.debug_str)
+ .debug_str     0x0000000000000000      0x27a core_cm3.o
+                                        0x2d8 (size before relaxing)
+ .debug_str     0x000000000000027a      0x189 system_LPC17xx.o
+                                        0x2d3 (size before relaxing)
+ .debug_str     0x0000000000000403        0xc main.o
+                                        0x158 (size before relaxing)
+ .debug_str     0x000000000000040f      0x290 uart.o
+                                        0x548 (size before relaxing)
+
+.comment        0x0000000000000000       0x1f
+ .comment       0x0000000000000000       0x1f core_cm3.o
+                                         0x20 (size before relaxing)
+ .comment       0x0000000000000000       0x20 system_LPC17xx.o
+ .comment       0x0000000000000000       0x20 main.o
+ .comment       0x0000000000000000       0x20 uart.o
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.note.gnu.arm.ident
+ *(.note.gnu.arm.ident)
+
+.ARM.attributes
+                0x0000000000000000       0x2f
+ *(.ARM.attributes)
+ .ARM.attributes
+                0x0000000000000000       0x21 startup_LPC17xx.o
+ .ARM.attributes
+                0x0000000000000021       0x33 core_cm3.o
+ .ARM.attributes
+                0x0000000000000054       0x33 system_LPC17xx.o
+ .ARM.attributes
+                0x0000000000000087       0x33 main.o
+ .ARM.attributes
+                0x00000000000000ba       0x33 uart.o
+
+/DISCARD/
+ *(.note.GNU-stack)
+OUTPUT(main.elf elf32-littlearm)
