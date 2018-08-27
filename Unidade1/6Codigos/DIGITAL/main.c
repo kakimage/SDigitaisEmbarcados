@@ -30,15 +30,15 @@ int main() {
   
   SystemInit();
   
-  pinMode(Pino(4, 29), OUTPUT);
+  pinMode(PIN_3_26, OUTPUT);
 
-  pinMode(PIN3_26, OUTPUT);
-  digitalWrite(PIN3_26, HIGH);
+  pinMode(PIN_3_26, OUTPUT);
+  digitalWrite(PIN_3_26, HIGH);
   for(;;) {
     delay();
-    digitalWrite(PIN4_29, HIGH);
+    digitalWrite(PIN_4_29, HIGH);
     delay();
-    digitalWrite(PIN4_29, LOW);
+    digitalWrite(PIN_4_29, LOW);
 
   }
 }
