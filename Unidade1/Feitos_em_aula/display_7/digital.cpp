@@ -9,6 +9,16 @@ uint8_t Pino (uint8_t porta, uint8_t bit)
 	return (porta<<5) | bit;
 }
 
+uint8_t digitalRead (uint8_t pino)
+{
+	uint8_t bit, porta;
+	porta = pino >> 5;
+	bit   = pino & 31;
+
+	return (  ((vet[porta]->FIOPIN) >> bit ) & 1 );
+	
+
+}
 void pinMode (uint8_t pino, uint8_t tipo)
 {
 	uint8_t bit, porta;

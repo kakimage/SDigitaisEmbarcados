@@ -16,7 +16,7 @@ volatile uint32_t delay;
 
 void fazDelay(void)
 {
-	for(delay = 0; delay < 10000; delay++) {
+	for(delay = 0; delay < 1000000; delay++) {
     	   __asm("NOP");
 	}
 }	

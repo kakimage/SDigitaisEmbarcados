@@ -180,6 +180,7 @@
 
 void pinMode     (uint8_t pino, uint8_t tipo );
 void digitalWrite(uint8_t pino, uint8_t valor);
+uint8_t digitalRead (uint8_t pino);
 
 
 
