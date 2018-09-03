@@ -11,7 +11,9 @@ int main() {
 
   display_init();
 
-  display('2');
+  mostra("1230");
+
+
 
   while(1)
   {

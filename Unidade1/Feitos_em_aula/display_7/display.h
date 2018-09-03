@@ -22,6 +22,8 @@
 
 
 void display_init(void);
-void display(char c);
+void display(int disp, char c);
+
+void mostra (char *st);
 
 #endif

@@ -64,6 +64,14 @@ Para as distribuições linux baseadas no Debian
 > sudo apt-get install gcc-arm-none-eabi<br/>
 > sudo apt-get install openocd<br/>
 > sudo apt-get install lpc21isp
+>
+> PS: aparentemente na versão embutida na distribuição do ubuntu/lubuntu 18.04
+> o gcc-arm-none-eabi tem problemas (em usar a biblioteca do C)
+>
+> Assim, para quem tiver com problemas, instale na mão 
+> Baixe a última versão e descompacte num diretório, configure o PATH
+> https://developer.arm.com/open-source/gnu-toolchain/gnu-rm/downloads
+>
 
  exemplo de uso:
          **lpc21isp  -control   -bin blink.bin  /dev/ttyUSB0 115200 12000**
