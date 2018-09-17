@@ -17,7 +17,7 @@ CC_SYMBOLS = -DTARGET_LPC1769 -DTOOLCHAIN_GCC_ARM -DNDEBUG -D__CORTEX_M3
 LD_FLAGS = -mcpu=cortex-m3 -mthumb -Wl,--gc-sections,-Map=$(PROJECT).map,--cref 
 LD_SYS_LIBS = -lc -lgcc -lnosys
 BASICOS = src/system_LPC17xx.o src/startup_LPC17xx.o src/core_cm3.o
-
+MEU_PROJETO = interrupcao_externa.o delay.o digital.o  uart.o main.o 
 
 
 $(PROJECT).bin: $(PROJECT).elf nxpsum
@@ -27,7 +27,7 @@ $(PROJECT).bin: $(PROJECT).elf nxpsum
 	# ****************************************************************
 
 
-$(PROJECT).elf: $(BASICOS)  delay.o digital.o  uart.o main.o 
+$(PROJECT).elf: $(BASICOS)  $(MEU_PROJETO) 
 	# *************************** $(PROJECT).elf *****************************  
 	$(LD) $(LD_FLAGS) -T$(LINKER_SCRIPT) $(LIBRARY_PATHS) -o $@ $(addprefix $(BUILD_DIR), $^) $(LIBRARIES) $(LD_SYS_LIBS) $(LIBRARIES) $(LD_SYS_LIBS)
 
@@ -41,6 +41,11 @@ $(PROJECT).elf: $(BASICOS)  delay.o digital.o  uart.o main.o
 main.o:	main.cpp
 	# *************************** main *****************************
 	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu++98 main.cpp -c
+	# **************************************************************
+
+interrupcao_externa.o:	interrupcao_externa.cpp interrupcao_externa.h
+	# *************************** main *****************************
+	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu99 interrupcao_externa.cpp -c
 	# **************************************************************
 
 
@@ -89,9 +94,10 @@ nxpsum:
 clean:
 	rm -f *.elf *.bin *.o src/*.o *.map nxpsum
 
+flash1:
+	 lpc21isp -control -bin $(PROJECT).bin /dev/ttyUSB1 115200 12000
+
 flash0:
 	 lpc21isp -control -bin $(PROJECT).bin /dev/ttyUSB0 115200 12000
 
-flash1:
-	 lpc21isp -control -bin $(PROJECT).bin /dev/ttyUSB1 115200 12000
 
