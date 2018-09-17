@@ -1,4 +1,4 @@
-GCC_BIN =  /usr/bin/X11/
+GCC_BIN =  
 PROJECT = main
 OBJECTS = system_LPC17xx.o startup_LPC17xx.o testa_serial.o delay.o digital.o uart.o
 SYS_OBJECTS = 

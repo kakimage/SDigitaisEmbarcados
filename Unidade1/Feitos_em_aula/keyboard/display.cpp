@@ -9,14 +9,14 @@ char vetor_pinos[]   ={SEGA,SEGB,SEGC,SEGD,SEGE,SEGF,SEGG};
 char vetor_enable[]  ={ENABLE_DISP0,ENABLE_DISP1,ENABLE_DISP2,ENABLE_DISP3};
 char vetor_simbolos[]={ 0x3f , 0x06, 0x5b, 0x4f };
 
-char digitos[4]={0,0,0,0};
+char digitos[4]={'0','0','0','0'};
 
 volatile uint32_t delay;
 
 
 void fazDelay(void)
 {
-	for(delay = 0; delay < 1000000; delay++) {
+	for(delay = 0; delay < 10000; delay++) {
     	   __asm("NOP");
 	}
 }	

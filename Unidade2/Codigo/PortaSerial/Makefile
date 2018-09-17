@@ -1,59 +1,94 @@
-GCC_BIN =  
-PROJECT = main
-OBJECTS = system_LPC17xx.o startup_LPC17xx.o testa_serial.o delay.o digital.o uart.o
-SYS_OBJECTS = 
-INCLUDE_PATHS = -I. -I./LPC1768 
-LIBRARY_PATHS = 
-LIBRARIES = 
-LINKER_SCRIPT = ./LPC1768/LPC1768.ld
-BUILD_DIR = build/
 
-############################################################################### 
-AS      = $(GCC_BIN)arm-none-eabi-as
+INCLUDE_PATHS = -I.  
+LINKER_SCRIPT = ./config/LPC1768.ld
+PROJECT = main
+
+
+
 CC      = $(GCC_BIN)arm-none-eabi-gcc
 CPP     = $(GCC_BIN)arm-none-eabi-g++
 LD      = $(GCC_BIN)arm-none-eabi-gcc
 OBJCOPY = $(GCC_BIN)arm-none-eabi-objcopy
-
 CCLOCAL = gcc
 
 CPU = -mcpu=cortex-m3 -mthumb
 CC_FLAGS = $(CPU) -c -fno-common -fmessage-length=0 -Wall -fno-exceptions -ffunction-sections -fdata-sections -g 
 CC_SYMBOLS = -DTARGET_LPC1769 -DTOOLCHAIN_GCC_ARM -DNDEBUG -D__CORTEX_M3
-
 LD_FLAGS = -mcpu=cortex-m3 -mthumb -Wl,--gc-sections,-Map=$(PROJECT).map,--cref 
 LD_SYS_LIBS = -lc -lgcc -lnosys
-
-all: $(PROJECT).bin
-
-flash:
-	 lpc21isp -control -bin main.bin /dev/ttyUSB0 115200 12000
+BASICOS = src/system_LPC17xx.o src/startup_LPC17xx.o src/core_cm3.o
 
 
-clean:
-	rm -f *~ $(PROJECT).bin $(PROJECT).elf $(addprefix $(BUILD_DIR), $(OBJECTS)) $(PROJECT).map
-	rmdir $(BUILD_DIR)
-
-.s.o:
-	mkdir -p $(BUILD_DIR)
-	$(AS) $(CPU) -o $(addprefix $(BUILD_DIR), $@) $<
-
-.c.o:
-	mkdir -p $(BUILD_DIR)
-	$(CC)  $(CC_FLAGS) $(CC_SYMBOLS) -std=gnu99   $(INCLUDE_PATHS) -o $(addprefix $(BUILD_DIR), $@) $<
-
-.cpp.o:
-	mkdir -p $(BUILD_DIR)
-	$(CPP) $(CC_FLAGS) $(CC_SYMBOLS) -std=gnu++98 $(INCLUDE_PATHS) -o $(addprefix $(BUILD_DIR), $@) $<
-
-# This is needed for NXP Cortex M devices
-nxpsum:
-	$(CCLOCAL) nxpsum.c -std=c99 -o nxpsum
-
-$(PROJECT).elf: $(OBJECTS) $(SYS_OBJECTS)
-	$(LD) $(LD_FLAGS) -T$(LINKER_SCRIPT) $(LIBRARY_PATHS) -o $@ $(addprefix $(BUILD_DIR), $^) $(LIBRARIES) $(LD_SYS_LIBS) $(LIBRARIES) $(LD_SYS_LIBS)
 
 $(PROJECT).bin: $(PROJECT).elf nxpsum
+	# *************************** $(PROJECT).bin *****************************  
 	$(OBJCOPY) -O binary $< $@
-	# Compute nxp checksum on .bin file here
 	./nxpsum $@
+	# ****************************************************************
+
+
+$(PROJECT).elf: $(BASICOS)  delay.o digital.o  uart.o main.o 
+	# *************************** $(PROJECT).elf *****************************  
+	$(LD) $(LD_FLAGS) -T$(LINKER_SCRIPT) $(LIBRARY_PATHS) -o $@ $(addprefix $(BUILD_DIR), $^) $(LIBRARIES) $(LD_SYS_LIBS) $(LIBRARIES) $(LD_SYS_LIBS)
+
+	# ****************************************************************
+
+
+
+
+
+
+main.o:	main.cpp
+	# *************************** main *****************************
+	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu++98 main.cpp -c
+	# **************************************************************
+
+
+uart.o:	uart.cpp uart.h
+	# *************************** UART *****************************
+	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu++98 uart.cpp -c 
+	# ***************************************************************
+
+delay.o:	delay.c delay.h
+	# *************************** delay ****************************
+	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu99 delay.c -c 
+	# ***************************************************************
+
+digital.o: digital.cpp digital.h
+	# *************************** digital ****************************
+	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) -std=gnu++98   $(INCLUDE_PATHS) digital.cpp -c
+	# ****************************************************************
+
+
+
+
+
+
+src/core_cm3.o:	src/core_cm3.c
+	# *************************** core_cm3 *************************
+	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu99 src/core_cm3.c -c  -o src/core_cm3.o
+	# **************************************************************
+
+
+src/system_LPC17xx.o:	src/system_LPC17xx.c
+	# *********************** system_LPC17xx ***********************
+	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu99 src/system_LPC17xx.c -c -o src/system_LPC17xx.o
+	# **************************************************************
+
+
+src/startup_LPC17xx.o:	src/startup_LPC17xx.c
+	# *********************** startup_LPC17xx **********************
+	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu99 src/startup_LPC17xx.c -c -o src/startup_LPC17xx.o
+	# **************************************************************
+
+nxpsum:
+	# **************************** nxpsum ****************************
+	$(CCLOCAL) nxpsum.c -std=c99 -o nxpsum
+	# ****************************************************************
+	
+clean:
+	rm -f *.elf *.bin *.o src/*.o *.map nxpsum
+
+flash:
+	 lpc21isp -control -bin $(PROJECT).bin /dev/ttyUSB0 115200 12000
+

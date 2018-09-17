@@ -19,6 +19,19 @@ int main() {
   	else digitalWrite(PIN_4_29, LOW);
   }
 
+  init_keyboard();
+  a = leia_teclado();
+
+  Teclado a;
+
+  tecla = a.leia();
+  a.configuraTaxaRepeticao(200);
+  
+  
+
+
+
+
 
   //display_init();
 

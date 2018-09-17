@@ -3,30 +3,24 @@
 #include "LPC17xx.h"
 #include <stdint.h>
 #include "display.h"
-#include "digital.h"
+#include "keyboard.h"
+
 
 
 int main() {
-  
+	char st[2];
+
+
   SystemInit();
-
-  pinMode(PIN_4_29, OUTPUT);  // LED G1
-  pinMode(PIN_1_08, INPUT);
-
-  while (1)
-  {
-  	if (  !digitalRead(PIN_1_08)  ) digitalWrite(PIN_4_29, HIGH);
-  	else digitalWrite(PIN_4_29, LOW);
-  }
+  display_init();
 
 
-  //display_init();
-
-  //mostra("1230");
-
-
-
-
+  init_keyboard();
+  
+  st[0] = leia_tecla(BLQ);
+  st[1] = 0;
+   mostra(st);
+  
   while(1)
   {
 

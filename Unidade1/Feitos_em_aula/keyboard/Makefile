@@ -1,6 +1,6 @@
 GCC_BIN =  
 PROJECT = main
-OBJECTS = system_LPC17xx.o startup_LPC17xx.o display.o main.o digital.o 
+OBJECTS = system_LPC17xx.o startup_LPC17xx.o display.o keyboard.o main.o digital.o 
 SYS_OBJECTS = 
 INCLUDE_PATHS = -I. -I./LPC1768 
 LIBRARY_PATHS = 
