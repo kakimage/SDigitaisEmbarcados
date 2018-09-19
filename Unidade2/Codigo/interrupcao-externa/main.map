@@ -179,7 +179,7 @@ Discarded input sections
                 0x0000000000000000       0xc8 src/core_cm3.o
  .debug_ranges  0x0000000000000000       0xb8 src/core_cm3.o
  .debug_line    0x0000000000000000      0x283 src/core_cm3.o
- .debug_str     0x0000000000000000      0x370 src/core_cm3.o
+ .debug_str     0x0000000000000000      0x36f src/core_cm3.o
  .comment       0x0000000000000000       0x80 src/core_cm3.o
  .debug_frame   0x0000000000000000      0x320 src/core_cm3.o
  .ARM.attributes
@@ -1033,21 +1033,21 @@ OUTPUT(main.elf elf32-littlearm)
  .debug_line    0x000000000000085b      0x303 uart.o
  .debug_line    0x0000000000000b5e      0x19e main.o
 
-.debug_str      0x0000000000000000     0x13ca
- .debug_str     0x0000000000000000      0x32f src/system_LPC17xx.o
-                                        0x37b (size before relaxing)
- .debug_str     0x000000000000032f       0xa8 src/startup_LPC17xx.o
-                                        0x2a3 (size before relaxing)
- .debug_str     0x00000000000003d7      0xa99 interrupcao_externa.o
-                                        0xd8f (size before relaxing)
- .debug_str     0x0000000000000e70       0xee delay.o
-                                        0x563 (size before relaxing)
- .debug_str     0x0000000000000f5e      0x139 digital.o
-                                        0x3e9 (size before relaxing)
- .debug_str     0x0000000000001097      0x2de uart.o
-                                        0x7b8 (size before relaxing)
- .debug_str     0x0000000000001375       0x55 main.o
-                                        0x642 (size before relaxing)
+.debug_str      0x0000000000000000     0x13c9
+ .debug_str     0x0000000000000000      0x32e src/system_LPC17xx.o
+                                        0x37a (size before relaxing)
+ .debug_str     0x000000000000032e       0xa8 src/startup_LPC17xx.o
+                                        0x2a2 (size before relaxing)
+ .debug_str     0x00000000000003d6      0xa99 interrupcao_externa.o
+                                        0xd8e (size before relaxing)
+ .debug_str     0x0000000000000e6f       0xee delay.o
+                                        0x562 (size before relaxing)
+ .debug_str     0x0000000000000f5d      0x139 digital.o
+                                        0x3e8 (size before relaxing)
+ .debug_str     0x0000000000001096      0x2de uart.o
+                                        0x7b7 (size before relaxing)
+ .debug_str     0x0000000000001374       0x55 main.o
+                                        0x641 (size before relaxing)
 
 .debug_frame    0x0000000000000000     0x1074
  .debug_frame   0x0000000000000000       0x54 src/system_LPC17xx.o
