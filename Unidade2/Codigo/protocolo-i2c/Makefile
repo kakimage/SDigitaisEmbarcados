@@ -18,7 +18,7 @@ LD_FLAGS = -mcpu=cortex-m3 -mthumb -Wl,--gc-sections,-Map=$(PROJECT).map,--cref
 LD_SYS_LIBS = -lc -lgcc -lnosys
 
 BASICOS    = src/system_LPC17xx.o src/startup_LPC17xx.o src/core_cm3.o
-MEUPROJETO = main.o 
+MEUPROJETO = main.o i2c_software.o digital.o delay.o uart.o
 
 
 
@@ -45,6 +45,25 @@ main.o:	main.cpp
 	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu++98 main.cpp -c
 	# **************************************************************
 
+i2c_software.o:	i2c_software.cpp i2c_software.h digital.h delay.o
+	# *************************** main *****************************
+	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu++98 i2c_software.cpp -c
+	# **************************************************************
+
+digital.o:	digital.cpp digital.h
+	# *************************** main *****************************
+	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu++98 digital.cpp -c
+	# **************************************************************
+
+uart.o:	uart.cpp uart.h
+	# *************************** main *****************************
+	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu++98 uart.cpp -c
+	# **
+
+delay.o:	delay.cpp delay.h
+	# *************************** main *****************************
+	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu++98 delay.cpp -c
+	# **************************************************************
 
 
 

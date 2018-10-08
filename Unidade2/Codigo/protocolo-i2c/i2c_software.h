@@ -9,6 +9,12 @@ void     i2c_start(void);
 void     i2c_stop(void);
 
 
+
+uint8_t i2c_write (uint8_t valor_byte);
+uint8_t i2c_read (void);
+
+
+
 // Le e escreve apenas 1 byte
 void     i2c_escreve_byte     (uint8_t dispositivo, uint16_t end, uint8_t valor);
 uint8_t  i2c_le_byte          (uint8_t dispositivo, uint16_t end);

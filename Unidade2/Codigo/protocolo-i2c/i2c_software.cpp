@@ -1,14 +1,13 @@
 
+#include "src/LPC17xx.h"
+#include "delay.h"
 #include "i2c_software.h"
 #include "digital.h"
-#include "delay.h"
 #include <stdio.h>
 #include "uart.h"
-#include "delay.h"
+#include <stdint.h>
 
-uint8_t PIN_DADOS;
-uint8_t PIN_CLK;
-
+uint8_t PIN_DADOS, PIN_CLOCK;
 
 void i2c_dados_baixo (void)
 {
@@ -23,27 +22,29 @@ void i2c_dados_alto (void)
 
 void i2c_clk_alto (void)
 {
-    pinMode(PIN_CLK, INPUT);
+    pinMode(PIN_CLOCK, INPUT);
 }
 
 void i2c_clk_baixo (void)
 {
-     pinMode(PIN_CLK, OUTPUT);
-     digitalWrite(PIN_CLK,LOW);
+     pinMode(PIN_CLOCK, OUTPUT);
+     digitalWrite(PIN_CLOCK,LOW);
 }
 
 void i2c_configura (uint8_t pino_dados, uint8_t pino_clk)
 {
-    PIN_DADOS = pino_dados;
-    PIN_CLK   = pino_clk;
+    PIN_DADOS    = pino_dados;
+    PIN_CLOCK   = pino_clk;
 
     // configura como entrada/saida
     i2c_clk_alto();
     i2c_dados_alto();
 	delay_ms(1);
+
 }
 void i2c_start (void)
 {
+
      i2c_clk_alto();
      delay_us(10);
      i2c_dados_alto();
@@ -54,7 +55,16 @@ void i2c_start (void)
  	 delay_us(10);  
 }
 
-
+void i2c_bit (uint8_t valor_bit)
+{
+    if (valor_bit) i2c_dados_alto();
+    else i2c_dados_baixo();
+    delay_us(10);
+    i2c_clk_alto();
+    delay_us(10);
+    i2c_clk_baixo();
+    i2c_dados_alto();
+}
 
 uint8_t i2c_le_bit (void)
 {
