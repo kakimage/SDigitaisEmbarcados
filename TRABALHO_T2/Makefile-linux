@@ -1,0 +1,37 @@
+
+
+PROJECT = main
+
+
+
+CC      = gcc
+CPP     = g++
+CCLOCAL = gcc
+
+CC_FLAGS = -D_USA_LINUX_  -Wall  -g 
+
+MEUPROJETO = main.o  memoria.o
+
+
+
+
+$(PROJECT).exe: $(MEUPROJETO) 
+	gcc main.o memoria.o -o $(PROJECT).exe
+	
+
+
+
+
+
+
+main.o:	main.cpp
+	# *************************** main *****************************
+	$(CC) $(CC_FLAGS)  -std=gnu++98 main.cpp -c
+	# **************************************************************
+
+memoria.o:  memoria.h i2c_software.o memoria.cpp
+	$(CC) $(CC_FLAGS)  -std=gnu++98 memoria.cpp -c
+
+
+clean:
+	rm -f  src/*.o 

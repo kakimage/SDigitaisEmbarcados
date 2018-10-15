@@ -44,6 +44,8 @@ unsigned char conversao (unsigned char cod)
         case 0x22:  return 'X';
         case 0x35:  return 'Y';
         case 0x1A:  return 'Z';
+        case 0x5A:  return '\r';
+        
         
         
         

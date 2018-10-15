@@ -24,11 +24,20 @@ int main ( void )
 	printf("teclado Rodando\n");
 
 	unsigned char a;
+	char buff[100];
+	int contador=0;
 
 	while(1)
 	{
 		a = teclado.leTecla();
-		printf("%c\n",a);
+		if (a=='\r')
+		{
+			buff[contador]=0;
+			contador=0;
+			printf("%s\n",buff);
+		}
+		else buff[contador++]=a;
+		
 	}
     return 0 ;
 }
