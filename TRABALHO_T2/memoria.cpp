@@ -41,9 +41,12 @@ void memoria_init (void)
 }
 uint16_t memoria_write (uint8_t dispositivo, uint16_t end, uint8_t b[], uint16_t qtd)
 {
+	printf("memoria_write end=%d   qtd=%d \n",end,qtd);
 	fseek(A, end, SEEK_SET);
-	return fwrite(b, 1, qtd, A);
 
+	fwrite(b, 1, qtd, A);
+	
+	return 0;
 }
 uint16_t memoria_read (uint8_t dispositivo, uint16_t end, uint8_t b[], uint16_t qtd)
 {
