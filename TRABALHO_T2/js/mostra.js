@@ -143,7 +143,7 @@
 				return ((dados[1] << 8) | dados[0]);
 			}
 
-			function criaBlocoPonteiro(ID, valor)
+			function criaBlocoPonteiro(ID, valor, valorP)
 			{
 				let iDiv = document.createElement('div');
 				iDiv.id = 'blocoPonteiro' + ID;
@@ -157,12 +157,17 @@
 				let divVALUE = document.createElement('div');
 				divVALUE.id = 'blocoPonteiroVALUE' + ID;
 				divVALUE.className = 'blocoPonteiroVALUE';
-                if (valor==65535) valor = "INVALIDO";
-				divVALUE.innerHTML = '(' + valor + ')';
+                if (valorP==65535) valorP = "INVALIDO";
+				divVALUE.innerHTML = '(' + valorP + ')';
 
 				iDiv.appendChild(divID);
 				iDiv.appendChild(divVALUE);
-
+iDiv.onclick = function()
+				{
+                    O('myModalLabel').innerHTML='Conteúdo do bloco de dados:'+ID;
+                    O('conteudoBlocoDados').innerHTML=valor;
+                    $('#modalDADOS').modal('show');
+				};
 				return iDiv;
 			}
 
@@ -183,13 +188,16 @@
 				return iDiv;
 			}
 
-			function leDado(id, text)
+			function leDado(id, text, retorno)
 			{
-				var INICIO = 45*12+2 + 225*2+id*32;
+				var INICIO = 45*12+2 +id*34;
 				var dados = new Uint8Array(text);
                 var x;
                 var texto='';
                 for (x=0;x<32;x++) texto = texto + '  ['+dados[INICIO+x]+']';
+
+                retorno.ponteiro = 	ponteiro =  ((dados[INICIO+34] << 8) | dados[INICIO+33]);
+            retorno.texto = texto;
 				return (texto);
 			}
       
@@ -229,12 +237,13 @@
 
 					// Captura blocos ponteiros
 
-					let valor, alvo, iDiv;
+					let valor, valorP, alvo, iDiv;
 
-					for (var x = 0; x < 225; x++)
+					for (var x = 0; x < 227; x++)
 					{
-						valor = lePonteiro(x, text);
-						iDiv = criaBlocoPonteiro(x, valor);
+						//valorP = lePonteiro(x, text);
+						valor = leDado (x,text, valorP);
+						iDiv = criaBlocoPonteiro(x, valor, valorP.ponteiro);
 
 						alvo = O('ponteiros');
 						alvo.appendChild(iDiv);
@@ -244,7 +253,7 @@
 
 					// Captura Blocos Dados
 
-					for (var x = 0; x < 225; x++)
+					/*for (var x = 0; x < 225; x++)
 					{
 						//leBlocoDados(x, text);
 						let iDiv;
@@ -254,7 +263,7 @@
 
 						let alvo = O('dados');
 						alvo.appendChild(iDiv);
-					}
+					}*/
 
 				};
 				reader.readAsArrayBuffer(input.files[0]);

@@ -33,9 +33,19 @@ int main ( void )
 #endif
 	memoria_init();
 
-
+	SA_FILE *A, *B;
 
 	SA_format();
+	A = SA_fopen ("meu","w");
+	B = SA_fopen ("UFSC","w");
+	if (A == NULL)
+	{
+		printf("Erro tentando criar um arquivo\n");
+	}
+	else
+	{
+		printf("criou o arquivo\n");
+	}
 	
 	
     return 0 ;
