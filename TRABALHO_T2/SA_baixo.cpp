@@ -29,7 +29,7 @@ void SA_salva_bloco_dados(uint8_t numero ,Tipo_Bloco b)
 	memoria_write (0, posicao, (uint8_t *) &b, sizeof(Tipo_Bloco));
 }
 
-SA_FILE * SA_fopen (char *nome, char *modo)
+SA_FILE * SA_fopen (const char *nome, const char *modo)
 {
 	entrada_arquivo ent;
 
@@ -68,6 +68,7 @@ SA_FILE * SA_fopen (char *nome, char *modo)
 		
 
 	}
+	return NULL;
 }
 
 void SA_format(void)
@@ -80,15 +81,15 @@ void SA_format(void)
 
 	ent.status = 0;
 	strcpy(ent.nome,"vazio");
-	ent.inicio=INVALIDO;
+	ent.indireto=INVALIDO;
 	ent.tamanho=0;
 
 	for (int x=0;x<32;x++) ent.dados[x]=0;
 	for (int x=0;x<MAXIMO_ARQUIVOS;x++) 	SA_salva_entrada_arquivo(x, ent);
 
-	printf("Criando %d\n",QTD_BLOCOS);
+	printf("Criando %ld\n",QTD_BLOCOS);
 	for (int x=0;x<32;x++) bloco.dados[x]=0;
-	for (int x=0;x<QTD_BLOCOS-1;x++)
+	for (uint16_t x=0;x<QTD_BLOCOS-1;x++)
 	{
 		bloco.ponteiro=x+1;
 		SA_salva_bloco_dados(x,bloco);

@@ -29,7 +29,7 @@ typedef struct {
 	uint8_t  status;
 	char     nome[8];
 	char     dados[32];
-	uint16_t inicio;
+	uint16_t indireto;
 	uint16_t tamanho;
 }entrada_arquivo;
 
@@ -47,7 +47,7 @@ typedef struct {
 
 
 void SA_format(void);
-SA_FILE * SA_fopen (char *nome, char *modo);
+SA_FILE * SA_fopen (const char *nome, const char *modo);
 
 
 #endif

@@ -38,7 +38,7 @@ int main ( void )
 	SA_format();
 	A = SA_fopen ("meu","w");
 	B = SA_fopen ("UFSC","w");
-	if (A == NULL)
+	if (( A == NULL) || (B==NULL) )
 	{
 		printf("Erro tentando criar um arquivo\n");
 	}
