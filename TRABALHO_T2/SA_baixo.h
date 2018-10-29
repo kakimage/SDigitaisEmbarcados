@@ -35,6 +35,7 @@ typedef struct {
 
 typedef struct {
 		int id;
+		int posicao;
 
 
 }SA_FILE;
@@ -48,6 +49,6 @@ typedef struct {
 
 void SA_format(void);
 SA_FILE * SA_fopen (const char *nome, const char *modo);
-
+void SA_fputc(uint8_t valor,SA_FILE *a);
 
 #endif

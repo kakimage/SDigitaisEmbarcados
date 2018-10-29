@@ -5,7 +5,12 @@
 #include <stdlib.h>
 
 
-
+uint16_t SA_le_cabecalho (void)
+{
+	uint16_t bloco;
+	memoria_read (0, 0, (uint8_t *) &bloco, sizeof(uint16_t));
+	return bloco;
+}
 
 void SA_escreve_cabecalho (uint16_t bloco)
 {
@@ -61,6 +66,7 @@ SA_FILE * SA_fopen (const char *nome, const char *modo)
 			SA_FILE *tmp;
 			tmp = (SA_FILE *) malloc (sizeof(SA_FILE));
 			tmp->id = achou;
+			tmp->posicao = 0;
 			return tmp;
 		}
 		else return NULL; 
@@ -69,6 +75,45 @@ SA_FILE * SA_fopen (const char *nome, const char *modo)
 
 	}
 	return NULL;
+}
+uint16_t aloca (void)
+{	
+	Tipo_Bloco b;
+	uint16_t bloco = SA_le_cabecalho();
+	SA_le_bloco_dados (bloco, &b);
+	SA_escreve_cabecalho(b.ponteiro);
+	return bloco;
+}
+void SA_fputc(uint8_t valor,SA_FILE *a)
+{
+	int16_t id = a->id;  uint16_t bloco, deslocamento;
+	int16_t posicao = a->posicao;
+	entrada_arquivo algumaCoisa;
+	SA_leia_entrada_arquivo (id, &algumaCoisa);
+
+	bloco = posicao / 32;
+	deslocamento = posicao % 32;
+
+
+	if (bloco == 0)
+	{
+		algumaCoisa.dados[deslocamento] = valor;
+		algumaCoisa.tamanho++;
+		SA_salva_entrada_arquivo (id, algumaCoisa);
+		a->posicao  =  a->posicao + 1;
+
+	}
+	else
+	{
+		if (algumaCoisa.indireto == INVALIDO)
+		{
+			x = aloca ();
+			algumaCoisa.indireto = x;
+		}
+		leiaBlocoDados(algumaCoisa.indireto, &bloco);
+	}
+
+
 }
 
 void SA_format(void)

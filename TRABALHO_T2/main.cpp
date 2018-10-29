@@ -45,6 +45,13 @@ int main ( void )
 	else
 	{
 		printf("criou o arquivo\n");
+
+		//SA_fputc('X',A);
+		SA_fputc('Y',B);
+
+		for (int x=0; x< 31; x++) SA_fputc(65+x,B);
+		
+			SA_fputc('a',B);
 	}
 	
 	
