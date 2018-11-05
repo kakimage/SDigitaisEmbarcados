@@ -16,24 +16,29 @@ void SA_escreve_cabecalho (uint16_t bloco)
 {
 	memoria_write (0, 0, (uint8_t *) &bloco, sizeof(uint16_t));
 }
-void SA_salva_entrada_arquivo(uint8_t numero, entrada_arquivo e)
+void SA_salva_entrada_arquivo(uint16_t numero, entrada_arquivo e)
 {
 	uint16_t posicao = 2 + (numero * sizeof(entrada_arquivo));
 	memoria_write (0, posicao, (uint8_t *) &e, sizeof(entrada_arquivo));
 }
-void SA_leia_entrada_arquivo (uint8_t numero, entrada_arquivo *e)
+void SA_leia_entrada_arquivo (uint16_t numero, entrada_arquivo *e)
 {
 		uint16_t posicao = 2 + (numero * sizeof(entrada_arquivo));
 	memoria_read (0, posicao, (uint8_t *) e, sizeof(entrada_arquivo));
 
 
 }
-void SA_salva_bloco_dados(uint8_t numero ,Tipo_Bloco b)
+void SA_salva_bloco_dados(uint16_t numero ,Tipo_Bloco b)
 {
 	uint16_t posicao = INICIO_AREA_BLOCO_PONTEIROS+ numero*TAMANHO_BLOCO;
 	memoria_write (0, posicao, (uint8_t *) &b, sizeof(Tipo_Bloco));
 }
 
+void SA_le_bloco_dados(uint16_t numero ,Tipo_Bloco *b)
+{
+	uint16_t posicao = INICIO_AREA_BLOCO_PONTEIROS+ numero*TAMANHO_BLOCO;
+	memoria_read (0, posicao, (uint8_t *) b, sizeof(Tipo_Bloco));
+}
 SA_FILE * SA_fopen (const char *nome, const char *modo)
 {
 	entrada_arquivo ent;
@@ -107,10 +112,9 @@ void SA_fputc(uint8_t valor,SA_FILE *a)
 	{
 		if (algumaCoisa.indireto == INVALIDO)
 		{
-			x = aloca ();
-			algumaCoisa.indireto = x;
+			algumaCoisa.indireto = aloca ();;
 		}
-		leiaBlocoDados(algumaCoisa.indireto, &bloco);
+		// SA_le_bloco_dados(algumaCoisa.indireto, &bloco);
 	}
 
 
