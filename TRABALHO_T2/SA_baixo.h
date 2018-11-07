@@ -40,15 +40,24 @@ typedef struct {
 
 }SA_FILE;
 
+typedef union {
+		char      bytes[32];
+		uint16_t  enderecos[16];
+}TipoDados;
+
 typedef struct {
-	char       dados[32];
+	TipoDados  dados;
 	uint16_t   ponteiro;
 
 }Tipo_Bloco;
 
+int SA_feof(SA_FILE *a);
 
 void SA_format(void);
 SA_FILE * SA_fopen (const char *nome, const char *modo);
 void SA_fputc(uint8_t valor,SA_FILE *a);
+void SA_fseek(SA_FILE *a, uint16_t posicao);
+int SA_fgetc(SA_FILE *a);
+
 
 #endif

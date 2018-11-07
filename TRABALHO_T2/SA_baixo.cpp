@@ -87,6 +87,9 @@ uint16_t aloca (void)
 	uint16_t bloco = SA_le_cabecalho();
 	SA_le_bloco_dados (bloco, &b);
 	SA_escreve_cabecalho(b.ponteiro);
+
+	for (int x=0; x< 16;x++) b.dados.enderecos[x] = INVALIDO;
+	SA_salva_bloco_dados (bloco, b);
 	return bloco;
 }
 void SA_fputc(uint8_t valor,SA_FILE *a)
@@ -112,12 +115,84 @@ void SA_fputc(uint8_t valor,SA_FILE *a)
 	{
 		if (algumaCoisa.indireto == INVALIDO)
 		{
-			algumaCoisa.indireto = aloca ();;
+			algumaCoisa.indireto = aloca ();
+			SA_salva_entrada_arquivo (id, algumaCoisa);
 		}
-		// SA_le_bloco_dados(algumaCoisa.indireto, &bloco);
+		Tipo_Bloco blocoIndices; 
+		Tipo_Bloco blocoDados;
+
+		SA_le_bloco_dados(algumaCoisa.indireto, &blocoIndices);
+
+		if (blocoIndices.dados.enderecos[bloco-1] == INVALIDO) 
+		{
+			blocoIndices.dados.enderecos[bloco-1] = aloca();
+			SA_salva_bloco_dados(algumaCoisa.indireto, blocoIndices);
+
+		}
+
+		SA_le_bloco_dados(blocoIndices.dados.enderecos[bloco-1], &blocoDados);
+		blocoDados.dados.bytes[deslocamento] = valor;
+		SA_salva_bloco_dados(blocoIndices.dados.enderecos[bloco-1], blocoDados);
+algumaCoisa.tamanho++;
+a->posicao  =  a->posicao + 1;
+SA_salva_entrada_arquivo (id, algumaCoisa);
+
 	}
 
 
+}
+
+
+int SA_fgetc(SA_FILE *a)
+{
+	int16_t id = a->id;  uint16_t bloco, deslocamento;
+	int16_t posicao = a->posicao;
+	entrada_arquivo algumaCoisa;
+	SA_leia_entrada_arquivo (id, &algumaCoisa);
+
+	bloco = posicao / 32;
+	deslocamento = posicao % 32;
+
+
+	if (bloco == 0)
+	{
+		a->posicao  =  a->posicao + 1;
+		return algumaCoisa.dados[deslocamento];
+	}
+	else
+	{
+		if (algumaCoisa.indireto == INVALIDO)
+		{
+			return -1;
+		}
+		Tipo_Bloco blocoIndices; 
+		Tipo_Bloco blocoDados;
+
+		SA_le_bloco_dados(algumaCoisa.indireto, &blocoIndices);
+
+		if (blocoIndices.dados.enderecos[bloco-1] == INVALIDO) 
+		{
+			return -1;
+		}
+
+		SA_le_bloco_dados(blocoIndices.dados.enderecos[bloco-1], &blocoDados);
+		a->posicao  =  a->posicao + 1;
+		return blocoDados.dados.bytes[deslocamento];
+
+	}
+
+
+}
+int SA_feof(SA_FILE *a)
+{
+	entrada_arquivo algumaCoisa;
+	SA_leia_entrada_arquivo (a->id, &algumaCoisa);
+	if (a->posicao == algumaCoisa.tamanho) return 1;
+	return 0;
+}
+void SA_fseek(SA_FILE *a, uint16_t posicao)
+{
+	a->posicao = posicao;
 }
 
 void SA_format(void)
@@ -137,7 +212,7 @@ void SA_format(void)
 	for (int x=0;x<MAXIMO_ARQUIVOS;x++) 	SA_salva_entrada_arquivo(x, ent);
 
 	printf("Criando %ld\n",QTD_BLOCOS);
-	for (int x=0;x<32;x++) bloco.dados[x]=0;
+	for (int x=0;x<32;x++) bloco.dados.bytes[x]=0;
 	for (uint16_t x=0;x<QTD_BLOCOS-1;x++)
 	{
 		bloco.ponteiro=x+1;

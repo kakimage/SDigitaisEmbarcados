@@ -18,7 +18,7 @@ LD_FLAGS = -mcpu=cortex-m3 -mthumb -Wl,--gc-sections,-Map=$(PROJECT).map,--cref
 LD_SYS_LIBS = -lc -lgcc -lnosys
 
 BASICOS    = src/system_LPC17xx.o src/startup_LPC17xx.o src/core_cm3.o
-MEUPROJETO = main.o i2c_software.o digital.o delay.o uart.o memoria.o
+MEUPROJETO = main.o SA_baixo.c i2c_software.o digital.o delay.o uart.o memoria.o
 
 
 

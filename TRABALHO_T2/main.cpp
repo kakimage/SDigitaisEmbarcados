@@ -14,6 +14,7 @@
 #include "delay.h"
 #include "digital.h"
 #include "uart.h"
+#include "SA_baixo.h"
 
 #else
 #include "memoria.h"
@@ -35,7 +36,7 @@ int main ( void )
 
 	SA_FILE *A, *B;
 
-	SA_format();
+	//SA_format();
 	A = SA_fopen ("meu","w");
 	B = SA_fopen ("UFSC","w");
 	if (( A == NULL) || (B==NULL) )
@@ -46,12 +47,20 @@ int main ( void )
 	{
 		printf("criou o arquivo\n");
 
-		//SA_fputc('X',A);
-		SA_fputc('Y',B);
-
-		for (int x=0; x< 31; x++) SA_fputc(65+x,B);
+		for (int x=0; x< 32; x++) SA_fputc(65+x,B);
+		for (int x=0; x< 32; x++) SA_fputc(65+x,B);
+		SA_fputc('a',B);
+		SA_fputc('b',B);
+		SA_fseek(B, 0);
+		int lido;
+		while (!SA_feof(B))
+		{
+			lido = SA_fgetc(B);
+			printf ("%d\n",lido);
+		}
 		
-			SA_fputc('a',B);
+
+
 	}
 	
 	
