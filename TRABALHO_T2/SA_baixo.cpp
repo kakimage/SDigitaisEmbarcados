@@ -211,7 +211,6 @@ void SA_format(void)
 	for (int x=0;x<32;x++) ent.dados[x]=0;
 	for (int x=0;x<MAXIMO_ARQUIVOS;x++) 	SA_salva_entrada_arquivo(x, ent);
 
-	printf("Criando %ld\n",QTD_BLOCOS);
 	for (int x=0;x<32;x++) bloco.dados.bytes[x]=0;
 	for (uint16_t x=0;x<QTD_BLOCOS-1;x++)
 	{

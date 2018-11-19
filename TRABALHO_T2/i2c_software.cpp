@@ -47,22 +47,22 @@ void i2c_start (void)
 {
 
      i2c_clk_alto();
-     delay_us(10);
+     delay_us(20);
      i2c_dados_alto();
-     delay_us(10);
+     delay_us(20);
      i2c_dados_baixo();
- 	 delay_us(10);
+ 	 delay_us(20);
      i2c_clk_baixo();
- 	 delay_us(10);  
+ 	 delay_us(20);  
 }
 
 void i2c_bit (uint8_t valor_bit)
 {
     if (valor_bit) i2c_dados_alto();
     else i2c_dados_baixo();
-    delay_us(10);
+    delay_us(20);
     i2c_clk_alto();
-    delay_us(10);
+    delay_us(20);
     i2c_clk_baixo();
     i2c_dados_alto();
 }
@@ -72,10 +72,10 @@ uint8_t i2c_le_bit (void)
     uint8_t valor;
 
     i2c_dados_alto();
-    delay_us(10);
+    delay_us(20);
     i2c_clk_alto();
     valor=digitalRead(PIN_DADOS);
-    delay_us(10);
+    delay_us(20);
     i2c_clk_baixo();
     return valor;
 }
@@ -86,7 +86,7 @@ uint8_t i2c_write (uint8_t valor_byte)
     for (x=0;x<8;x++) i2c_bit(1&(valor_byte>>(7-x)));
 	a=i2c_le_bit();
 
-	delay_us(10);
+	delay_us(20);
     return a;
 }
 

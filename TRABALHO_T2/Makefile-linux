@@ -38,4 +38,4 @@ memoria.o:  memoria.h i2c_software.o memoria.cpp
 
 
 clean:
-	rm -f  src/*.o 
+	rm -f  src/*.o *.o

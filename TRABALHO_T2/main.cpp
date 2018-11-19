@@ -3,25 +3,17 @@
 // para gravar na placa (usando o bootloader): 
 //                    make flash
 
+#include "memoria.h"
+#include <stdio.h>
+#include <string.h>
+#include <inttypes.h>
+#include "SA_baixo.h"
 
 #ifdef _USA_ARM_
 
-#include <stdio.h>
-#include <string.h>
-#include <inttypes.h>
-#include "memoria.h"
 #include "src/LPC17xx.h"
-#include "delay.h"
-#include "digital.h"
 #include "uart.h"
-#include "SA_baixo.h"
 
-#else
-#include "memoria.h"
-#include <stdio.h>
-#include <string.h>
-#include <inttypes.h>
-#include "SA_baixo.h"
 #endif
 
 int main ( void ) 
@@ -31,37 +23,41 @@ int main ( void )
 #ifdef _USA_ARM_
 	SystemInit();
 	UART0_Init(9600);
+	printf("Rodando\n");
 #endif
 	memoria_init();
 
-	SA_FILE *A, *B;
+	SA_FILE  *B;
 
-	//SA_format();
-	A = SA_fopen ("meu","w");
+	SA_format();
 	B = SA_fopen ("UFSC","w");
-	if (( A == NULL) || (B==NULL) )
+	if (B==NULL)
 	{
 		printf("Erro tentando criar um arquivo\n");
 	}
 	else
 	{
-		printf("criou o arquivo\n");
+		printf("Grava dados\n");
 
-		for (int x=0; x< 32; x++) SA_fputc(65+x,B);
-		for (int x=0; x< 32; x++) SA_fputc(65+x,B);
-		SA_fputc('a',B);
-		SA_fputc('b',B);
-		SA_fseek(B, 0);
+		for (int x=0; x< 26; x++) SA_fputc(65+x,B);
+		for (int x=0; x< 26; x++) SA_fputc(97+x,B);
+		for (int x=0; x< 10; x++) SA_fputc(48+x,B);
+		
+			
 		int lido;
-		while (!SA_feof(B))
+		printf("Terminou de gravar dados\n");
+
+		
+	
+		// mostra as letras minusculas e os numeros
+		SA_fseek(B, 26);
+		for (int x=0;x<36;x++)
 		{
 			lido = SA_fgetc(B);
-			printf ("%d\n",lido);
+			printf ("%c\n",lido);
 		}
 		
-
-
-	}
+			}
 	
 	
     return 0 ;

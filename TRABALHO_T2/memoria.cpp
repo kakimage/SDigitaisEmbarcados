@@ -4,26 +4,43 @@
 #ifdef _USA_ARM_
 #include "digital.h"
 
+#define MIN(a,b) (((a)<(b))?(a):(b))
 void memoria_init (void)
 {
 	i2c_configura(PIN_0_27, PIN_0_28);
 
 }
 
-uint16_t memoria_write (uint8_t dispositivo, uint16_t end, uint8_t b[], uint16_t qtd)
+uint16_t memoria_write (uint8_t dispositivo, uint16_t end, uint8_t b[], uint16_t tam)
 {
-	uint16_t tmp;
+	
+		// TODO
+	uint16_t R, qtd,  contador=0;
 
-	tmp =  i2c_sequencial_write ( dispositivo,  end,  b,  qtd);
-	return tmp;
+	while (tam>0)
+	{
+		R = (end / 32) * 32 +32;
+		qtd = i2c_sequencial_write (dispositivo, end, b+contador, MIN(R - end, tam));
+		end+=qtd;  tam-=qtd;
+		contador+=qtd;
+	}
+	return contador;
 
 }
 
-uint16_t memoria_read (uint8_t dispositivo, uint16_t end, uint8_t b[], uint16_t qtd)
+
+uint16_t memoria_read (uint8_t dispositivo, uint16_t end, uint8_t b[], uint16_t tam)
 {
-	uint16_t tmp;
-	tmp = i2c_sequencial_read ( dispositivo,  end,  b,  qtd);
-	return tmp;
+	uint16_t R, qtd, contador=0;
+
+	while (tam>0)
+	{
+		R = (end / 32) * 32 +32;
+		qtd = i2c_sequencial_read (dispositivo, end, b+contador, MIN(R - end, tam));
+		contador+=qtd;
+		end+=qtd;  tam-=qtd;
+	}
+	return contador;
 }
 
 #else

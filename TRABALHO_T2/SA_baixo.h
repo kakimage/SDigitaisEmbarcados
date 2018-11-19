@@ -1,6 +1,8 @@
 
 #ifndef _SA_
 #define _SA_
+#pragma pack(1)
+
 #include <inttypes.h> 
 
 // Definicoes do SA e da EEPROM
@@ -24,13 +26,13 @@
 
 #define INVALIDO 0xFFFF
 
-#pragma pack(1)
+
 typedef struct {
+	uint16_t indireto;
+	uint16_t tamanho;
 	uint8_t  status;
 	char     nome[8];
 	char     dados[32];
-	uint16_t indireto;
-	uint16_t tamanho;
 }entrada_arquivo;
 
 typedef struct {
@@ -41,14 +43,13 @@ typedef struct {
 }SA_FILE;
 
 typedef union {
-		char      bytes[32];
 		uint16_t  enderecos[16];
+		char      bytes[32];
 }TipoDados;
 
 typedef struct {
-	TipoDados  dados;
 	uint16_t   ponteiro;
-
+	TipoDados  dados;
 }Tipo_Bloco;
 
 int SA_feof(SA_FILE *a);

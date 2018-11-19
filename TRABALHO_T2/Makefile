@@ -18,7 +18,7 @@ LD_FLAGS = -mcpu=cortex-m3 -mthumb -Wl,--gc-sections,-Map=$(PROJECT).map,--cref
 LD_SYS_LIBS = -lc -lgcc -lnosys
 
 BASICOS    = src/system_LPC17xx.o src/startup_LPC17xx.o src/core_cm3.o
-MEUPROJETO = main.o SA_baixo.c i2c_software.o digital.o delay.o uart.o memoria.o
+MEUPROJETO = main.o SA_baixo.o i2c_software.o digital.o delay.o uart.o memoria.o
 
 
 
@@ -44,6 +44,10 @@ main.o:	main.cpp
 	# *************************** main *****************************
 	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu++98 main.cpp -c
 	# **************************************************************
+
+
+SA_baixo.o: SA_baixo.cpp SA_baixo.h memoria.o memoria.h
+	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu++98 SA_baixo.cpp -c
 
 memoria.o:  memoria.h i2c_software.o memoria.cpp
 	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu++98 memoria.cpp -c
