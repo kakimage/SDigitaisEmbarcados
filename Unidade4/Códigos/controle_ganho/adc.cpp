@@ -1,4 +1,4 @@
-#include "LPC17xx.h"
+#include "src/LPC17xx.h"
 #include "adc.h"
 
 
@@ -26,7 +26,7 @@ int le_adc (void)
 	LPC_SC->PCLKSEL0 = LPC_SC->PCLKSEL0 & ~(PCLK_ADC_MASK);
 	LPC_SC->PCLKSEL0 |=  (3 << PCLK_ADC);
 		
-	// Configura que o pino P0.23 sera utilizado na funcao AD0.0 
+	// Configura que o pino P0.24 sera utilizado na funcao AD0.0 
 	// pagina 106 do datasheet
 	LPC_PINCON->PINSEL1	|= SELECT_ADC0; 
 	
