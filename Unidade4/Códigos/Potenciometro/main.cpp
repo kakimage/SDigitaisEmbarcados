@@ -27,7 +27,7 @@ int main ( void )
 	{
 		dado = le_adc();
 		printf("%d\n",dado);
-		delay_ms(2000);
+		delay_ms(1000);
 	}
 	
     return 0 ;

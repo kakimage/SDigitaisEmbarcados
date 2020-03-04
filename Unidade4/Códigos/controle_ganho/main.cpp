@@ -23,10 +23,12 @@ int main ( void )
 	printf("Rodando\n");
 
 	uint16_t dado;
+	float temp;
 	while(1)
 	{
 		dado = le_adc();
-		printf("%d\n",dado);
+		temp = ((dado * 3.3) / 4095)*100;
+		printf("%f\n",temp);
 		delay_ms(2000);
 	}
 	
