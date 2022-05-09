@@ -50,13 +50,23 @@ void digitalWrite( uint8_t pb, uint8_t valor)
 
 volatile uint32_t delay;
 
+uint8_t digitalRead (uint8_t pb)
+{
+	uint8_t porta = pb >> 5;
+	uint8_t bit = pb & 31;
+	 return ( (   ((vet[porta]->FIOPIN) >>  bit)  & 1)) ;
+	
+}
+
 
 int main() {
   
   SystemInit();
-  
+  uint8_t d;
 
-  pinMode( PIN(3,25), OUTPUT);
+  pinMode( PIN(1,29), OUTPUT);
+  pinMode( PIN(1,23), INPUT);
+  
     
   for(;;) {
     for(delay = 0; delay < 1000000; delay++) {
@@ -64,13 +74,9 @@ int main() {
     }
     
     // Turn LED ON
-   digitalWrite( PIN(3,25), HIGH);
+    d = digitalRead (PIN (1,23) );
     
-    for(uint32_t delay = 0; delay < 1000000; delay++) {
-       __asm("NOP");
-    }
-    
-    // Turn LED OFF
-      digitalWrite( PIN(3,25), LOW);
+    if (d == 0) digitalWrite( PIN(1,29), LOW);
+    else digitalWrite( PIN(1,29), HIGH);
   }
 }
