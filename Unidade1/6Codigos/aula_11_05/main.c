@@ -13,53 +13,59 @@
 
 
 #include "LPC17xx.h"
+#include "digital.h"
 #include <stdint.h>
 
 
 #define PINO 25
-#define PIN(P,B) ((P<<5)|B)
-#define INPUT 1
-#define OUTPUT 0
-#define HIGH 1
-#define LOW 0
 
 
-LPC_GPIO_TypeDef      * vet[5]={LPC_GPIO0,LPC_GPIO1,LPC_GPIO2,LPC_GPIO3,LPC_GPIO4};
+void mostraDisplay (uint8_t numero_display, uint8_t valor);
+
+ uint8_t SEGA, SEGB, SEGC, SEGD, SEGE, SEGF, SEGG;
+  uint8_t DISPLAY0,DISPLAY1, DISPLAY2, DISPLAY3;
+  
+  uint8_t disp[]={0x3f,0x06, 0x5b, 0x4f, 0x66, 0xcd,0x7d,0x07,0x7f,0x6f};
+  
 
 
-
-void pinMode (uint8_t pb, uint8_t tipo)
-{
-	uint8_t porta = pb >> 5;
-	uint8_t bit = pb & 31;
-	if (tipo == OUTPUT) vet[porta]->FIODIR |= (1 << bit);
-	else vet[porta]->FIODIR &= (~(1 << bit));
-	
-}
-void digitalWrite( uint8_t pb, uint8_t valor)
-{
-	uint8_t porta = pb >> 5;
-	uint8_t bit = pb & 31;
-	
-	if (valor==HIGH)
-		    vet[porta]->FIOSET = (1 << bit);
-	else 
-		    vet[porta]->FIOCLR = (1 << bit);
-}
 
 
 volatile uint32_t delay;
-
-uint8_t digitalRead (uint8_t pb)
+void mostra (uint16_t valor)
 {
-	uint8_t porta = pb >> 5;
-	uint8_t bit = pb & 31;
-	 return ( (   ((vet[porta]->FIOPIN) >>  bit)  & 1)) ;
+	uint8_t digitos[4];
+	uint16_t divisor=1000;
+	
+	for (int a=0;a<4;a++)
+	{
+		digitos[a]=valor/divisor;
+		valor = valor - digitos[a]*divisor;
+		divisor=divisor/10;
+	}
+	
+	uint8_t podeOmitir;
+	while (1)
+	{
+		podeOmitir = 1;
+		for (int b=0; b< 4;b++)
+		{
+			if (digitos[b] != 0) podeOmitir=0;
+			
+			if (!podeOmitir) mostraDisplay(b, digitos[b]);
+			
+			for(delay = 0; delay < 40000; delay++) {
+       				__asm("NOP");
+    			}
+		}
+	}
+	
 	
 }
-
 void mostraDisplay (uint8_t numero_display, uint8_t valor)
 {
+  uint8_t v[]={DISPLAY0,DISPLAY1,DISPLAY2,DISPLAY3};
+	
   digitalWrite(SEGA, HIGH);
   digitalWrite(SEGB, HIGH);
   digitalWrite(SEGC, HIGH);
@@ -67,15 +73,29 @@ void mostraDisplay (uint8_t numero_display, uint8_t valor)
   digitalWrite(SEGE, LOW);
   digitalWrite(SEGF, LOW);
   digitalWrite(SEGG, HIGH);
-    digitalWrite(DISPLAY0, HIGH);
+  digitalWrite(DISPLAY0, LOW);
+  digitalWrite(DISPLAY1, LOW);
+  digitalWrite(DISPLAY2, LOW);
+  digitalWrite(DISPLAY3, LOW);
+  
+  
+  digitalWrite(v[numero_display], HIGH);
+  
+  digitalWrite(SEGA, disp[valor]&1);
+  digitalWrite(SEGB, (disp[valor]>>1)&1);
+  digitalWrite(SEGC, (disp[valor]>>2)&1);
+  digitalWrite(SEGD, (disp[valor]>>3)&1);
+  digitalWrite(SEGE, (disp[valor]>>4)&1);
+  digitalWrite(SEGF, (disp[valor]>>5)&1);
+  digitalWrite(SEGG, (disp[valor]>>6)&1);
+  
 }
 int main() {
   
   SystemInit();
 
 
-  uint8_t SEGA, SEGB, SEGC, SEGD, SEGE, SEGF, SEGG;
-  uint8_t DISPLAY0;
+ 
   
   SEGA = PIN(0,4);
   SEGB = PIN(0,5);
@@ -85,6 +105,10 @@ int main() {
   SEGF = PIN(0,9);
   SEGG = PIN(0,10);
   DISPLAY0 = PIN(3,25);
+  DISPLAY1 = PIN(3,26);
+  DISPLAY2 = PIN(4,28);
+  DISPLAY3 = PIN(4,29);
+  
   
   
   pinMode( SEGA, OUTPUT);
@@ -95,16 +119,11 @@ int main() {
   pinMode( SEGF, OUTPUT);
   pinMode( SEGG, OUTPUT);
   pinMode(DISPLAY0, OUTPUT);
+  pinMode(DISPLAY1, OUTPUT);
+  pinMode(DISPLAY2, OUTPUT);
+  pinMode(DISPLAY3, OUTPUT);
   
-  digitalWrite(SEGA, HIGH);
-  digitalWrite(SEGB, HIGH);
-  digitalWrite(SEGC, HIGH);
-  digitalWrite(SEGD, HIGH);
-  digitalWrite(SEGE, LOW);
-  digitalWrite(SEGF, LOW);
-  digitalWrite(SEGG, HIGH);
-    digitalWrite(DISPLAY0, HIGH);
-    
+    mostra(123);
   for(;;) {
     
   }
