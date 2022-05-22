@@ -1,6 +1,6 @@
 GCC_BIN =  /usr/bin/X11/
 PROJECT = main
-OBJECTS = system_LPC17xx.o startup_LPC17xx.o main.o digital.o seg.o delay.o
+OBJECTS = system_LPC17xx.o startup_LPC17xx.o main.o digital.o seg.o delay.o teclado.o timer.o
 SYS_OBJECTS = 
 INCLUDE_PATHS = -I. -I./LPC1768 
 LIBRARY_PATHS = 

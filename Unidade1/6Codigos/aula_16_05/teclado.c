@@ -24,7 +24,12 @@ uint8_t c[4],l[4];
 
  
  }
-
+ int8_t leiaLinha (void)
+ {
+     for (uint8_t col=0;col<4;col++)
+         if (digitalRead(c[col])==0) return col;
+     return -1;
+ }
  void   teclado_bread(uint8_t *letra)
  {
      uint8_t m[4][4];
@@ -47,7 +52,7 @@ uint8_t c[4],l[4];
       m[3][2]=15;
       
       
-      
+     
       
       
 
@@ -55,10 +60,26 @@ uint8_t c[4],l[4];
      
      
      
-    for (uint8_t x=0;x<4;x++) digitalWrite(l[x],HIGH);
+    for (uint8_t tmp=0;tmp<4;tmp++) digitalWrite(l[tmp],HIGH);
 
-    // testa a linha 0;
-    digitalWrite(l[0],LOW);
+
+    int8_t xx;
+    while(1)
+    {
+    for (uint8_t linha=0;linha<4;linha++)
+    {
+         digitalWrite(l[linha],LOW);
+         xx = leiaLinha();
+        digitalWrite(l[linha],HIGH);
+         if (xx >=0)  {
+             *letra = m[linha][xx];
+             return;
+         }
+
+    }
+    }
+    
+    
 
 
  }

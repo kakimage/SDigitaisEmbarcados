@@ -65,9 +65,76 @@ Discarded input sections
  .text          0x0000000000000000        0x0 build/seg.o
  .data          0x0000000000000000        0x0 build/seg.o
  .bss           0x0000000000000000        0x0 build/seg.o
+ .bss.SEGA      0x0000000000000000        0x1 build/seg.o
+ .bss.SEGB      0x0000000000000000        0x1 build/seg.o
+ .bss.SEGC      0x0000000000000000        0x1 build/seg.o
+ .bss.SEGD      0x0000000000000000        0x1 build/seg.o
+ .bss.SEGE      0x0000000000000000        0x1 build/seg.o
+ .bss.SEGF      0x0000000000000000        0x1 build/seg.o
+ .bss.SEGG      0x0000000000000000        0x1 build/seg.o
+ .bss.DISPLAY0  0x0000000000000000        0x1 build/seg.o
+ .bss.DISPLAY1  0x0000000000000000        0x1 build/seg.o
+ .bss.DISPLAY2  0x0000000000000000        0x1 build/seg.o
+ .bss.DISPLAY3  0x0000000000000000        0x1 build/seg.o
+ .data.disp     0x0000000000000000        0xa build/seg.o
+ .text.configuraDisplay
+                0x0000000000000000      0x124 build/seg.o
+ .text.mostra   0x0000000000000000       0xac build/seg.o
+ .text.mostraDisplay
+                0x0000000000000000      0x1b8 build/seg.o
+ .debug_info    0x0000000000000000      0x2fb build/seg.o
+ .debug_abbrev  0x0000000000000000       0xdb build/seg.o
+ .debug_aranges
+                0x0000000000000000       0x30 build/seg.o
+ .debug_ranges  0x0000000000000000       0x20 build/seg.o
+ .debug_line    0x0000000000000000      0x17b build/seg.o
+ .debug_str     0x0000000000000000      0x2e2 build/seg.o
+ .comment       0x0000000000000000       0x5a build/seg.o
+ .debug_frame   0x0000000000000000       0x7c build/seg.o
+ .ARM.attributes
+                0x0000000000000000       0x2d build/seg.o
  .text          0x0000000000000000        0x0 build/delay.o
  .data          0x0000000000000000        0x0 build/delay.o
  .bss           0x0000000000000000        0x0 build/delay.o
+ .bss.delay     0x0000000000000000        0x4 build/delay.o
+ .text.delay_ms
+                0x0000000000000000       0x34 build/delay.o
+ .debug_info    0x0000000000000000       0xa1 build/delay.o
+ .debug_abbrev  0x0000000000000000       0x6d build/delay.o
+ .debug_aranges
+                0x0000000000000000       0x20 build/delay.o
+ .debug_ranges  0x0000000000000000       0x10 build/delay.o
+ .debug_line    0x0000000000000000       0x91 build/delay.o
+ .debug_str     0x0000000000000000      0x1f7 build/delay.o
+ .comment       0x0000000000000000       0x5a build/delay.o
+ .debug_frame   0x0000000000000000       0x30 build/delay.o
+ .ARM.attributes
+                0x0000000000000000       0x2d build/delay.o
+ .text          0x0000000000000000        0x0 build/teclado.o
+ .data          0x0000000000000000        0x0 build/teclado.o
+ .bss           0x0000000000000000        0x0 build/teclado.o
+ .bss.c         0x0000000000000000        0x4 build/teclado.o
+ .bss.l         0x0000000000000000        0x4 build/teclado.o
+ .text.teclado_configura
+                0x0000000000000000       0x98 build/teclado.o
+ .text.leiaLinha
+                0x0000000000000000       0x40 build/teclado.o
+ .text.teclado_bread
+                0x0000000000000000       0xec build/teclado.o
+ .debug_info    0x0000000000000000      0x25e build/teclado.o
+ .debug_abbrev  0x0000000000000000      0x102 build/teclado.o
+ .debug_aranges
+                0x0000000000000000       0x30 build/teclado.o
+ .debug_ranges  0x0000000000000000       0x20 build/teclado.o
+ .debug_line    0x0000000000000000      0x17d build/teclado.o
+ .debug_str     0x0000000000000000      0x262 build/teclado.o
+ .comment       0x0000000000000000       0x5a build/teclado.o
+ .debug_frame   0x0000000000000000       0x80 build/teclado.o
+ .ARM.attributes
+                0x0000000000000000       0x2d build/teclado.o
+ .text          0x0000000000000000        0x0 build/timer.o
+ .data          0x0000000000000000        0x0 build/timer.o
+ .bss           0x0000000000000000        0x0 build/timer.o
  .data          0x0000000000000000        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-atexit.o)
  .bss           0x0000000000000000        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-atexit.o)
  .text          0x0000000000000000       0x20 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-exit.o)
@@ -202,6 +269,8 @@ LOAD build/main.o
 LOAD build/digital.o
 LOAD build/seg.o
 LOAD build/delay.o
+LOAD build/teclado.o
+LOAD build/timer.o
 LOAD /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a
 LOAD /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libgcc.a
 LOAD /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a
@@ -215,7 +284,7 @@ END GROUP
 LOAD /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtend.o
 LOAD /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
 
-.text           0x0000000000000000      0x8d4
+.text           0x0000000000000000      0x644
  *(.isr_vector)
  .isr_vector    0x0000000000000000       0xc4 build/startup_LPC17xx.o
                 0x0000000000000000                g_pfnVectors
@@ -231,7 +300,6 @@ LOAD /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
                 0x00000000000002fc        0x6 build/startup_LPC17xx.o
                 0x00000000000002fc                TIMER2_IRQHandler
                 0x00000000000002fc                DebugMon_Handler
-                0x00000000000002fc                RIT_IRQHandler
                 0x00000000000002fc                I2C0_IRQHandler
                 0x00000000000002fc                SysTick_Handler
                 0x00000000000002fc                PWM1_IRQHandler
@@ -270,40 +338,42 @@ LOAD /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
                 0x00000000000002fc                UART3_IRQHandler
                 0x00000000000002fc                MCPWM_IRQHandler
                 0x00000000000002fc                ENET_IRQHandler
- .text.main     0x0000000000000302       0x68 build/main.o
-                0x0000000000000302                main
- *fill*         0x000000000000036a        0x2 
- .text.pinMode  0x000000000000036c       0x78 build/digital.o
-                0x000000000000036c                pinMode
+ *fill*         0x0000000000000302        0x2 
+ .text.piscaLED
+                0x0000000000000304       0x38 build/main.o
+                0x0000000000000304                piscaLED
+ .text.main     0x000000000000033c       0x28 build/main.o
+                0x000000000000033c                main
+ .text.pinMode  0x0000000000000364       0x78 build/digital.o
+                0x0000000000000364                pinMode
  .text.digitalWrite
-                0x00000000000003e4       0x5c build/digital.o
-                0x00000000000003e4                digitalWrite
- .text.configuraDisplay
-                0x0000000000000440      0x124 build/seg.o
-                0x0000000000000440                configuraDisplay
- .text.mostra   0x0000000000000564       0xac build/seg.o
-                0x0000000000000564                mostra
- .text.mostraDisplay
-                0x0000000000000610      0x1b8 build/seg.o
-                0x0000000000000610                mostraDisplay
- .text.delay_ms
-                0x00000000000007c8       0x34 build/delay.o
-                0x00000000000007c8                delay_ms
- .text          0x00000000000007fc        0xc /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-atexit.o)
-                0x00000000000007fc                atexit
- .text          0x0000000000000808       0x34 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-fini.o)
-                0x0000000000000808                __libc_fini_array
- .text          0x000000000000083c       0x64 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__atexit.o)
-                0x000000000000083c                __register_exitproc
- .text.startup  0x00000000000008a0       0x14 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__call_atexit.o)
+                0x00000000000003dc       0x5c build/digital.o
+                0x00000000000003dc                digitalWrite
+ .text.NVIC_EnableIRQ
+                0x0000000000000438       0x30 build/timer.o
+ .text.NVIC_SetPriority
+                0x0000000000000468       0x54 build/timer.o
+ .text.timer_init
+                0x00000000000004bc       0x80 build/timer.o
+                0x00000000000004bc                timer_init
+ .text.RIT_IRQHandler
+                0x000000000000053c       0x30 build/timer.o
+                0x000000000000053c                RIT_IRQHandler
+ .text          0x000000000000056c        0xc /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-atexit.o)
+                0x000000000000056c                atexit
+ .text          0x0000000000000578       0x34 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-fini.o)
+                0x0000000000000578                __libc_fini_array
+ .text          0x00000000000005ac       0x64 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__atexit.o)
+                0x00000000000005ac                __register_exitproc
+ .text.startup  0x0000000000000610       0x14 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__call_atexit.o)
  *(.init)
- .init          0x00000000000008b4        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crti.o
-                0x00000000000008b4                _init
- .init          0x00000000000008b8        0x8 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
+ .init          0x0000000000000624        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crti.o
+                0x0000000000000624                _init
+ .init          0x0000000000000628        0x8 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
  *(.fini)
- .fini          0x00000000000008c0        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crti.o
-                0x00000000000008c0                _fini
- .fini          0x00000000000008c4        0x8 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
+ .fini          0x0000000000000630        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crti.o
+                0x0000000000000630                _fini
+ .fini          0x0000000000000634        0x8 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
  *crtbegin.o(.ctors)
  *crtbegin?.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
@@ -315,125 +385,105 @@ LOAD /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
  *(SORT_BY_NAME(.dtors.*))
  *(.dtors)
  *(.rodata*)
- .rodata        0x00000000000008cc        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-impure.o)
-                0x00000000000008cc                _global_impure_ptr
+ .rodata        0x000000000000063c        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-impure.o)
+                0x000000000000063c                _global_impure_ptr
  *(.eh_frame*)
- .eh_frame      0x00000000000008d0        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
- .eh_frame      0x00000000000008d0        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtend.o
+ .eh_frame      0x0000000000000640        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
+ .eh_frame      0x0000000000000640        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtend.o
 
-.glue_7         0x00000000000008d4        0x0
- .glue_7        0x00000000000008d4        0x0 linker stubs
+.glue_7         0x0000000000000644        0x0
+ .glue_7        0x0000000000000644        0x0 linker stubs
 
-.glue_7t        0x00000000000008d4        0x0
- .glue_7t       0x00000000000008d4        0x0 linker stubs
+.glue_7t        0x0000000000000644        0x0
+ .glue_7t       0x0000000000000644        0x0 linker stubs
 
-.vfp11_veneer   0x00000000000008d4        0x0
- .vfp11_veneer  0x00000000000008d4        0x0 linker stubs
+.vfp11_veneer   0x0000000000000644        0x0
+ .vfp11_veneer  0x0000000000000644        0x0 linker stubs
 
-.v4_bx          0x00000000000008d4        0x0
- .v4_bx         0x00000000000008d4        0x0 linker stubs
+.v4_bx          0x0000000000000644        0x0
+ .v4_bx         0x0000000000000644        0x0 linker stubs
 
-.iplt           0x00000000000008d4        0x0
- .iplt          0x00000000000008d4        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
+.iplt           0x0000000000000644        0x0
+ .iplt          0x0000000000000644        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
 
-.rel.dyn        0x00000000000008d4        0x0
- .rel.iplt      0x00000000000008d4        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
+.rel.dyn        0x0000000000000644        0x0
+ .rel.iplt      0x0000000000000644        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x00000000000008d4                __exidx_start = .
+                0x0000000000000644                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x00000000000008d4                __exidx_end = .
-                0x00000000000008d4                __etext = .
-                0x00000000000008d4                __sidata = __etext
+                0x0000000000000644                __exidx_end = .
+                0x0000000000000644                __etext = .
+                0x0000000000000644                __sidata = __etext
 
-.data           0x00000000100000c8      0x45c load address 0x00000000000008d4
+.data           0x00000000100000c8      0x454 load address 0x0000000000000644
                 0x00000000100000c8                __data_start__ = .
  *(vtable)
  *(.data*)
- .data.vet      0x00000000100000c8       0x14 build/digital.o
-                0x00000000100000c8                vet
- .data.disp     0x00000000100000dc        0xa build/seg.o
-                0x00000000100000dc                disp
- *fill*         0x00000000100000e6        0x2 
- .data          0x00000000100000e8      0x430 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-impure.o)
-                0x00000000100000e8                _impure_ptr
-                0x0000000010000518                . = ALIGN (0x4)
-                0x0000000010000518                PROVIDE (__preinit_array_start = .)
+ .data.LED      0x00000000100000c8        0x1 build/main.o
+                0x00000000100000c8                LED
+ .data.estadoLED
+                0x00000000100000c9        0x1 build/main.o
+                0x00000000100000c9                estadoLED
+ *fill*         0x00000000100000ca        0x2 
+ .data.vet      0x00000000100000cc       0x14 build/digital.o
+                0x00000000100000cc                vet
+ .data          0x00000000100000e0      0x430 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-impure.o)
+                0x00000000100000e0                _impure_ptr
+                0x0000000010000510                . = ALIGN (0x4)
+                0x0000000010000510                PROVIDE (__preinit_array_start = .)
  *(.preinit_array)
-                0x0000000010000518                PROVIDE (__preinit_array_end = .)
-                0x0000000010000518                . = ALIGN (0x4)
-                0x0000000010000518                PROVIDE (__init_array_start = .)
+                0x0000000010000510                PROVIDE (__preinit_array_end = .)
+                0x0000000010000510                . = ALIGN (0x4)
+                0x0000000010000510                PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  .init_array.00000
-                0x0000000010000518        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__call_atexit.o)
+                0x0000000010000510        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__call_atexit.o)
  *(.init_array)
- .init_array    0x000000001000051c        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
-                0x0000000010000520                PROVIDE (__init_array_end = .)
-                0x0000000010000520                . = ALIGN (0x4)
-                0x0000000010000520                PROVIDE (__fini_array_start = .)
+ .init_array    0x0000000010000514        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
+                0x0000000010000518                PROVIDE (__init_array_end = .)
+                0x0000000010000518                . = ALIGN (0x4)
+                0x0000000010000518                PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array)
- .fini_array    0x0000000010000520        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
-                0x0000000010000524                PROVIDE (__fini_array_end = .)
-                0x0000000010000524                . = ALIGN (0x4)
-                0x0000000010000524                __data_end__ = .
+ .fini_array    0x0000000010000518        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
+                0x000000001000051c                PROVIDE (__fini_array_end = .)
+                0x000000001000051c                . = ALIGN (0x4)
+                0x000000001000051c                __data_end__ = .
 
 .tm_clone_table
-                0x0000000010000524        0x0 load address 0x0000000000000d30
+                0x000000001000051c        0x0 load address 0x0000000000000a98
  .tm_clone_table
-                0x0000000010000524        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
+                0x000000001000051c        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
  .tm_clone_table
-                0x0000000010000524        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtend.o
+                0x000000001000051c        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtend.o
 
-.igot.plt       0x0000000010000524        0x0 load address 0x0000000000000d30
- .igot.plt      0x0000000010000524        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
+.igot.plt       0x000000001000051c        0x0 load address 0x0000000000000a98
+ .igot.plt      0x000000001000051c        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
 
-.stackarea      0x0000000010000524      0x800 load address 0x0000000000000d30
- .stackarea     0x0000000010000524      0x800 build/startup_LPC17xx.o
-                0x0000000010000524                pulStack
+.stackarea      0x000000001000051c      0x800 load address 0x0000000000000a98
+ .stackarea     0x000000001000051c      0x800 build/startup_LPC17xx.o
+                0x000000001000051c                pulStack
 
-.bss            0x0000000010000d24       0x2c load address 0x0000000000001530
-                0x0000000010000d24                __bss_start__ = .
+.bss            0x0000000010000d1c       0x20 load address 0x0000000000001298
+                0x0000000010000d1c                __bss_start__ = .
  *(.bss*)
- .bss           0x0000000010000d24       0x1c /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
- .bss.SEGA      0x0000000010000d40        0x1 build/seg.o
-                0x0000000010000d40                SEGA
- .bss.SEGB      0x0000000010000d41        0x1 build/seg.o
-                0x0000000010000d41                SEGB
- .bss.SEGC      0x0000000010000d42        0x1 build/seg.o
-                0x0000000010000d42                SEGC
- .bss.SEGD      0x0000000010000d43        0x1 build/seg.o
-                0x0000000010000d43                SEGD
- .bss.SEGE      0x0000000010000d44        0x1 build/seg.o
-                0x0000000010000d44                SEGE
- .bss.SEGF      0x0000000010000d45        0x1 build/seg.o
-                0x0000000010000d45                SEGF
- .bss.SEGG      0x0000000010000d46        0x1 build/seg.o
-                0x0000000010000d46                SEGG
- .bss.DISPLAY0  0x0000000010000d47        0x1 build/seg.o
-                0x0000000010000d47                DISPLAY0
- .bss.DISPLAY1  0x0000000010000d48        0x1 build/seg.o
-                0x0000000010000d48                DISPLAY1
- .bss.DISPLAY2  0x0000000010000d49        0x1 build/seg.o
-                0x0000000010000d49                DISPLAY2
- .bss.DISPLAY3  0x0000000010000d4a        0x1 build/seg.o
-                0x0000000010000d4a                DISPLAY3
- *fill*         0x0000000010000d4b        0x1 
- .bss.delay     0x0000000010000d4c        0x4 build/delay.o
-                0x0000000010000d4c                delay
+ .bss           0x0000000010000d1c       0x1c /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
+ .bss.funcao    0x0000000010000d38        0x4 build/timer.o
+                0x0000000010000d38                funcao
  *(COMMON)
-                0x0000000010000d50                __bss_end__ = .
+                0x0000000010000d3c                __bss_end__ = .
 
-.heap           0x0000000010000d50        0x0
-                0x0000000010000d50                __end__ = .
-                0x0000000010000d50                end = __end__
+.heap           0x0000000010000d3c        0x0
+                0x0000000010000d3c                __end__ = .
+                0x0000000010000d3c                end = __end__
  *(.heap*)
-                0x0000000010000d50                __HeapLimit = .
+                0x0000000010000d3c                __HeapLimit = .
 
-.stack_dummy    0x0000000010000d50        0x0
+.stack_dummy    0x0000000010000d3c        0x0
  *(.stack)
                 0x0000000010008000                __StackTop = (ORIGIN (RAM) + LENGTH (RAM))
                 0x0000000010008000                __StackLimit = (__StackTop - SIZEOF (.stack_dummy))
@@ -457,23 +507,21 @@ LOAD linker stubs
  .ARM.attributes
                 0x00000000000000d1       0x2d build/digital.o
  .ARM.attributes
-                0x00000000000000fe       0x2d build/seg.o
+                0x00000000000000fe       0x2d build/timer.o
  .ARM.attributes
-                0x000000000000012b       0x2d build/delay.o
+                0x000000000000012b       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-atexit.o)
  .ARM.attributes
-                0x0000000000000158       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-atexit.o)
+                0x0000000000000158       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-fini.o)
  .ARM.attributes
-                0x0000000000000185       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-fini.o)
+                0x0000000000000185       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-impure.o)
  .ARM.attributes
-                0x00000000000001b2       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-impure.o)
+                0x00000000000001b2       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__atexit.o)
  .ARM.attributes
-                0x00000000000001df       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__atexit.o)
+                0x00000000000001df       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__call_atexit.o)
  .ARM.attributes
-                0x000000000000020c       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__call_atexit.o)
+                0x000000000000020c       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtend.o
  .ARM.attributes
-                0x0000000000000239       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtend.o
- .ARM.attributes
-                0x0000000000000266       0x1d /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
+                0x0000000000000239       0x1d /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
 
 .comment        0x0000000000000000       0xa7
  .comment       0x0000000000000000       0x59 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
@@ -482,8 +530,7 @@ LOAD linker stubs
  .comment       0x0000000000000059       0x5a build/startup_LPC17xx.o
  .comment       0x0000000000000059       0x5a build/main.o
  .comment       0x0000000000000059       0x5a build/digital.o
- .comment       0x0000000000000059       0x5a build/seg.o
- .comment       0x0000000000000059       0x5a build/delay.o
+ .comment       0x0000000000000059       0x5a build/timer.o
  .comment       0x0000000000000059       0x4e /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-atexit.o)
                                          0x4f (size before relaxing)
  .comment       0x00000000000000a7       0x4f /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-fini.o)
@@ -492,113 +539,104 @@ LOAD linker stubs
  .comment       0x00000000000000a7       0x4f /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__call_atexit.o)
  .comment       0x00000000000000a7       0x5a /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtend.o
 
-.debug_info     0x0000000000000000     0x364c
+.debug_info     0x0000000000000000     0x3a44
  .debug_info    0x0000000000000000      0x335 build/system_LPC17xx.o
  .debug_info    0x0000000000000335      0x18a build/startup_LPC17xx.o
- .debug_info    0x00000000000004bf      0x15e build/main.o
- .debug_info    0x000000000000061d      0x4a7 build/digital.o
- .debug_info    0x0000000000000ac4      0x2fb build/seg.o
- .debug_info    0x0000000000000dbf       0xa1 build/delay.o
- .debug_info    0x0000000000000e60      0x995 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-atexit.o)
- .debug_info    0x00000000000017f5      0x102 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-fini.o)
- .debug_info    0x00000000000018f7      0x92a /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-impure.o)
- .debug_info    0x0000000000002221      0x9d5 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__atexit.o)
- .debug_info    0x0000000000002bf6      0xa56 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__call_atexit.o)
+ .debug_info    0x00000000000004bf       0xf3 build/main.o
+ .debug_info    0x00000000000005b2      0x4a7 build/digital.o
+ .debug_info    0x0000000000000a59      0x7ff build/timer.o
+ .debug_info    0x0000000000001258      0x995 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-atexit.o)
+ .debug_info    0x0000000000001bed      0x102 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-fini.o)
+ .debug_info    0x0000000000001cef      0x92a /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-impure.o)
+ .debug_info    0x0000000000002619      0x9d5 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__atexit.o)
+ .debug_info    0x0000000000002fee      0xa56 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__call_atexit.o)
 
-.debug_abbrev   0x0000000000000000      0xf17
+.debug_abbrev   0x0000000000000000      0xfe2
  .debug_abbrev  0x0000000000000000      0x104 build/system_LPC17xx.o
  .debug_abbrev  0x0000000000000104      0x103 build/startup_LPC17xx.o
- .debug_abbrev  0x0000000000000207       0x91 build/main.o
- .debug_abbrev  0x0000000000000298      0x17a build/digital.o
- .debug_abbrev  0x0000000000000412       0xdb build/seg.o
- .debug_abbrev  0x00000000000004ed       0x6d build/delay.o
- .debug_abbrev  0x000000000000055a      0x232 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-atexit.o)
- .debug_abbrev  0x000000000000078c       0xcf /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-fini.o)
- .debug_abbrev  0x000000000000085b      0x1b8 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-impure.o)
- .debug_abbrev  0x0000000000000a13      0x252 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__atexit.o)
- .debug_abbrev  0x0000000000000c65      0x2b2 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__call_atexit.o)
+ .debug_abbrev  0x0000000000000207       0xc0 build/main.o
+ .debug_abbrev  0x00000000000002c7      0x17a build/digital.o
+ .debug_abbrev  0x0000000000000441      0x1e4 build/timer.o
+ .debug_abbrev  0x0000000000000625      0x232 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-atexit.o)
+ .debug_abbrev  0x0000000000000857       0xcf /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-fini.o)
+ .debug_abbrev  0x0000000000000926      0x1b8 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-impure.o)
+ .debug_abbrev  0x0000000000000ade      0x252 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__atexit.o)
+ .debug_abbrev  0x0000000000000d30      0x2b2 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__call_atexit.o)
 
-.debug_aranges  0x0000000000000000      0x190
+.debug_aranges  0x0000000000000000      0x180
  .debug_aranges
                 0x0000000000000000       0x28 build/system_LPC17xx.o
  .debug_aranges
                 0x0000000000000028       0x28 build/startup_LPC17xx.o
  .debug_aranges
-                0x0000000000000050       0x20 build/main.o
+                0x0000000000000050       0x28 build/main.o
  .debug_aranges
-                0x0000000000000070       0x30 build/digital.o
+                0x0000000000000078       0x30 build/digital.o
  .debug_aranges
-                0x00000000000000a0       0x30 build/seg.o
+                0x00000000000000a8       0x38 build/timer.o
  .debug_aranges
-                0x00000000000000d0       0x20 build/delay.o
+                0x00000000000000e0       0x20 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-atexit.o)
  .debug_aranges
-                0x00000000000000f0       0x20 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-atexit.o)
+                0x0000000000000100       0x20 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-fini.o)
  .debug_aranges
-                0x0000000000000110       0x20 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-fini.o)
+                0x0000000000000120       0x18 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-impure.o)
  .debug_aranges
-                0x0000000000000130       0x18 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-impure.o)
+                0x0000000000000138       0x20 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__atexit.o)
  .debug_aranges
-                0x0000000000000148       0x20 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__atexit.o)
- .debug_aranges
-                0x0000000000000168       0x28 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__call_atexit.o)
+                0x0000000000000158       0x28 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__call_atexit.o)
 
 .debug_ranges   0x0000000000000000       0xc8
  .debug_ranges  0x0000000000000000       0x18 build/system_LPC17xx.o
  .debug_ranges  0x0000000000000018       0x18 build/startup_LPC17xx.o
- .debug_ranges  0x0000000000000030       0x10 build/main.o
- .debug_ranges  0x0000000000000040       0x20 build/digital.o
- .debug_ranges  0x0000000000000060       0x20 build/seg.o
- .debug_ranges  0x0000000000000080       0x10 build/delay.o
+ .debug_ranges  0x0000000000000030       0x18 build/main.o
+ .debug_ranges  0x0000000000000048       0x20 build/digital.o
+ .debug_ranges  0x0000000000000068       0x28 build/timer.o
  .debug_ranges  0x0000000000000090       0x38 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__call_atexit.o)
 
-.debug_line     0x0000000000000000      0xede
+.debug_line     0x0000000000000000      0xe25
  .debug_line    0x0000000000000000      0x2b1 build/system_LPC17xx.o
  .debug_line    0x00000000000002b1       0xf7 build/startup_LPC17xx.o
- .debug_line    0x00000000000003a8       0xb9 build/main.o
- .debug_line    0x0000000000000461      0x149 build/digital.o
- .debug_line    0x00000000000005aa      0x17b build/seg.o
- .debug_line    0x0000000000000725       0x91 build/delay.o
- .debug_line    0x00000000000007b6      0x14a /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-atexit.o)
- .debug_line    0x0000000000000900       0xd7 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-fini.o)
- .debug_line    0x00000000000009d7       0xe3 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-impure.o)
- .debug_line    0x0000000000000aba      0x1e7 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__atexit.o)
- .debug_line    0x0000000000000ca1      0x23d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__call_atexit.o)
+ .debug_line    0x00000000000003a8       0xc4 build/main.o
+ .debug_line    0x000000000000046c      0x149 build/digital.o
+ .debug_line    0x00000000000005b5      0x148 build/timer.o
+ .debug_line    0x00000000000006fd      0x14a /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-atexit.o)
+ .debug_line    0x0000000000000847       0xd7 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-fini.o)
+ .debug_line    0x000000000000091e       0xe3 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-impure.o)
+ .debug_line    0x0000000000000a01      0x1e7 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__atexit.o)
+ .debug_line    0x0000000000000be8      0x23d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__call_atexit.o)
 
-.debug_str      0x0000000000000000      0xd85
+.debug_str      0x0000000000000000      0xfd7
  .debug_str     0x0000000000000000      0x345 build/system_LPC17xx.o
                                         0x379 (size before relaxing)
  .debug_str     0x0000000000000345       0xa4 build/startup_LPC17xx.o
                                         0x2a1 (size before relaxing)
- .debug_str     0x00000000000003e9       0x14 build/main.o
-                                        0x258 (size before relaxing)
- .debug_str     0x00000000000003fd      0x170 build/digital.o
+ .debug_str     0x00000000000003e9       0x27 build/main.o
+                                        0x224 (size before relaxing)
+ .debug_str     0x0000000000000410      0x170 build/digital.o
                                         0x37f (size before relaxing)
- .debug_str     0x000000000000056d       0xad build/seg.o
-                                        0x2e2 (size before relaxing)
- .debug_str     0x000000000000061a       0x17 build/delay.o
-                                        0x1f7 (size before relaxing)
- .debug_str     0x0000000000000631      0x52c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-atexit.o)
+ .debug_str     0x0000000000000580      0x303 build/timer.o
+                                        0x657 (size before relaxing)
+ .debug_str     0x0000000000000883      0x52c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-atexit.o)
                                         0x5e3 (size before relaxing)
- .debug_str     0x0000000000000b5d       0xc4 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-fini.o)
+ .debug_str     0x0000000000000daf       0xc4 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-fini.o)
                                         0x1f2 (size before relaxing)
- .debug_str     0x0000000000000c21       0x97 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-impure.o)
+ .debug_str     0x0000000000000e73       0x97 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-impure.o)
                                         0x598 (size before relaxing)
- .debug_str     0x0000000000000cb8       0x54 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__atexit.o)
+ .debug_str     0x0000000000000f0a       0x54 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__atexit.o)
                                         0x601 (size before relaxing)
- .debug_str     0x0000000000000d0c       0x79 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__call_atexit.o)
+ .debug_str     0x0000000000000f5e       0x79 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__call_atexit.o)
                                         0x614 (size before relaxing)
 
-.debug_frame    0x0000000000000000      0x2e8
+.debug_frame    0x0000000000000000      0x2fc
  .debug_frame   0x0000000000000000       0x50 build/system_LPC17xx.o
  .debug_frame   0x0000000000000050       0x58 build/startup_LPC17xx.o
- .debug_frame   0x00000000000000a8       0x30 build/main.o
- .debug_frame   0x00000000000000d8       0x88 build/digital.o
- .debug_frame   0x0000000000000160       0x7c build/seg.o
- .debug_frame   0x00000000000001dc       0x30 build/delay.o
- .debug_frame   0x000000000000020c       0x20 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-atexit.o)
- .debug_frame   0x000000000000022c       0x34 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-fini.o)
- .debug_frame   0x0000000000000260       0x38 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__atexit.o)
- .debug_frame   0x0000000000000298       0x50 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__call_atexit.o)
+ .debug_frame   0x00000000000000a8       0x48 build/main.o
+ .debug_frame   0x00000000000000f0       0x88 build/digital.o
+ .debug_frame   0x0000000000000178       0xa8 build/timer.o
+ .debug_frame   0x0000000000000220       0x20 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-atexit.o)
+ .debug_frame   0x0000000000000240       0x34 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-fini.o)
+ .debug_frame   0x0000000000000274       0x38 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__atexit.o)
+ .debug_frame   0x00000000000002ac       0x50 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__call_atexit.o)
 
 .debug_loc      0x0000000000000000      0x31c
  .debug_loc     0x0000000000000000       0x32 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-atexit.o)
@@ -630,6 +668,7 @@ I2C0_IRQHandler                                   build/startup_LPC17xx.o
 I2C1_IRQHandler                                   build/startup_LPC17xx.o
 I2C2_IRQHandler                                   build/startup_LPC17xx.o
 I2S_IRQHandler                                    build/startup_LPC17xx.o
+LED                                               build/main.o
 MCPWM_IRQHandler                                  build/startup_LPC17xx.o
 MemManage_Handler                                 build/startup_LPC17xx.o
 NMI_Handler                                       build/startup_LPC17xx.o
@@ -638,7 +677,8 @@ PLL1_IRQHandler                                   build/startup_LPC17xx.o
 PWM1_IRQHandler                                   build/startup_LPC17xx.o
 PendSV_Handler                                    build/startup_LPC17xx.o
 QEI_IRQHandler                                    build/startup_LPC17xx.o
-RIT_IRQHandler                                    build/startup_LPC17xx.o
+RIT_IRQHandler                                    build/timer.o
+                                                  build/startup_LPC17xx.o
 RTC_IRQHandler                                    build/startup_LPC17xx.o
 Reset_Handler                                     build/startup_LPC17xx.o
 SEGA                                              build/seg.o
@@ -723,29 +763,42 @@ _start                                            /usr/lib/gcc/arm-none-eabi/9.2
 atexit                                            /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-atexit.o)
                                                   /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-__call_atexit.o)
                                                   /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/crt0.o
+c                                                 build/teclado.o
 configuraDisplay                                  build/seg.o
-                                                  build/main.o
 delay                                             build/delay.o
 delay_ms                                          build/delay.o
                                                   build/seg.o
 digitalRead                                       build/digital.o
+                                                  build/teclado.o
 digitalWrite                                      build/digital.o
+                                                  build/teclado.o
                                                   build/seg.o
+                                                  build/main.o
 disp                                              build/seg.o
+estadoLED                                         build/main.o
 exit                                              /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-exit.o)
                                                   /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/crt0.o
+funcao                                            build/timer.o
 g_pfnVectors                                      build/startup_LPC17xx.o
 hardware_init_hook                                /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/crt0.o
+l                                                 build/teclado.o
+leiaLinha                                         build/teclado.o
 main                                              build/main.o
                                                   build/startup_LPC17xx.o
                                                   /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/crt0.o
 memset                                            /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-memset.o)
                                                   /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/crt0.o
 mostra                                            build/seg.o
-                                                  build/main.o
 mostraDisplay                                     build/seg.o
 pinMode                                           build/digital.o
+                                                  build/teclado.o
                                                   build/seg.o
+                                                  build/main.o
+piscaLED                                          build/main.o
 pulStack                                          build/startup_LPC17xx.o
 software_init_hook                                /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/crt0.o
+teclado_bread                                     build/teclado.o
+teclado_configura                                 build/teclado.o
+timer_init                                        build/timer.o
+                                                  build/main.o
 vet                                               build/digital.o
