@@ -2,7 +2,7 @@
 #define _TIMER_
 #include "LPC17xx.h"
 
-void timer_init(void (*f)(void), uint32_t freq);
+void timer_init(void (*f)(void));
 
 
 

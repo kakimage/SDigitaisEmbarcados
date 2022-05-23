@@ -14,30 +14,41 @@
 
 #include "LPC17xx.h"
 #include "digital.h"
-#include "seg.h"
 #include <stdint.h>
-#include "teclado.h"
-#include "timer.h"
+#include "periodica.h"
+
+#define LED_VERMELHO PIN(3,26)
+#define LED_VERDE     PIN(4,29)
 
 
 
-  uint8_t LED = PIN(4,28);
-
-volatile uint8_t estadoLED=HIGH;
-
-void piscaLED (void)
+void piscaLedVermelho (void)
 {
-  digitalWrite(LED, estadoLED);
-  estadoLED=!estadoLED;
+	static uint8_t estadoLedVermelho = LOW;
+	digitalWrite(LED_VERMELHO, estadoLedVermelho);
+	estadoLedVermelho = !estadoLedVermelho;
+}
 
+void  piscaLedVerde (void)
+{
+	static uint8_t estadoLedVerde = LOW;
+	digitalWrite(LED_VERDE, estadoLedVerde);
+	estadoLedVerde = !estadoLedVerde;
 }
 
 int main() {
 
   SystemInit();
-  pinMode( LED, OUTPUT);
-    timer_init(piscaLED, 12000);
-
+  
+  pinMode(LED_VERMELHO,OUTPUT);
+  pinMode(LED_VERDE    ,OUTPUT);
+  
+  
+  periodica_init();
+  periodica_cria ("ledVermelho",1000, piscaLedVermelho);
+  periodica_cria ("ledAzul"    ,3000, piscaLedVerde);
+  
+  
   while(1)
   {
 
