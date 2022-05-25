@@ -36,7 +36,7 @@ int main() {
 
   SystemInit();
   pinMode( LED, OUTPUT);
-    timer_init(piscaLED, 12000);
+    timer_init(piscaLED, 40000);
 
   while(1)
   {
