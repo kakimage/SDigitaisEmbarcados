@@ -21,7 +21,7 @@
 
 
 
-  uint8_t LED = PIN(4,29);
+  uint8_t LED = PIN(4,28);
 
 volatile uint8_t estadoLED=HIGH;
 
