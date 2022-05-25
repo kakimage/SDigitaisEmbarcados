@@ -16,6 +16,8 @@
 #include "digital.h"
 #include <stdint.h>
 #include "periodica.h"
+#include "delay.h"
+
 
 #define LED_VERMELHO PIN(3,26)
 #define LED_VERDE     PIN(4,29)
@@ -45,9 +47,12 @@ int main() {
   
   
   periodica_init();
+  delay_init();
   periodica_cria ("ledVermelho",1000, piscaLedVermelho);
-  periodica_cria ("ledAzul"    ,3000, piscaLedVerde);
-  
+
+  periodica_cria ("ledAzul"    ,10000, piscaLedVerde);
+  delay_ms(10000);
+  periodica_remove("ledVermelho");
   
   while(1)
   {
