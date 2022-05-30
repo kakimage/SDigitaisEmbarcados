@@ -31,7 +31,7 @@ int main() {
   for (uint16_t v=0;v<9999;v++)
   {
   	seg_apresenta(v);
-  	delay_ms(100);
+  	delay_ms(500);
   }
   while(1){}
  
