@@ -19,44 +19,20 @@
 #include "delay.h"
 
 
-#define LED_VERMELHO PIN(3,26)
-#define LED_VERDE     PIN(4,29)
-
-
-
-void piscaLedVermelho (void)
-{
-	static uint8_t estadoLedVermelho = LOW;
-	digitalWrite(LED_VERMELHO, estadoLedVermelho);
-	estadoLedVermelho = !estadoLedVermelho;
-}
-
-void  piscaLedVerde (void)
-{
-	static uint8_t estadoLedVerde = LOW;
-	digitalWrite(LED_VERDE, estadoLedVerde);
-	estadoLedVerde = !estadoLedVerde;
-}
-
 int main() {
 
   SystemInit();
-  
-  pinMode(LED_VERMELHO,OUTPUT);
-  pinMode(LED_VERDE    ,OUTPUT);
-  
-  
+    
   periodica_init();
   delay_init();
-  periodica_cria ("ledVermelho",1000, piscaLedVermelho);
-
-  periodica_cria ("ledAzul"    ,10000, piscaLedVerde);
-  delay_ms(10000);
-  periodica_remove("ledVermelho");
+  seg_init();
   
-  while(1)
-  {
-
-  }
+  apresenta(123);
+  delay_ms(10000);
+  apresenta(456);
+  delay_ms(10000);
+  apresenta(987);
+  
+  while(1){}
  
 }
