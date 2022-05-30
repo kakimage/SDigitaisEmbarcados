@@ -25,14 +25,19 @@ int main() {
     
   periodica_init();
   delay_init();
-  seg_init();
+  seg_init( );
+   
   
-  apresenta(123);
-  delay_ms(10000);
-  apresenta(456);
-  delay_ms(10000);
-  apresenta(987);
-  
+  for (uint16_t v=0;v<9999;v++)
+  {
+  	seg_apresenta(v);
+  	delay_ms(100);
+  }
   while(1){}
+ 
+ 
+ 
+ 
+ 
  
 }

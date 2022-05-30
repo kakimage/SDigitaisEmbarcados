@@ -3,9 +3,20 @@
 #define __SEG__
 #include <stdint.h>
 
-void configuraDisplay( uint8_t pSEGA,  uint8_t pSEGB, uint8_t pSEGC,  uint8_t pSEGD,  uint8_t pSEGE,  uint8_t pSEGF,  uint8_t pSEGG,  uint8_t pDISPLAY0, uint8_t pDISPLAY1,  uint8_t pDISPLAY2,  uint8_t pDISPLAY3);
-void mostraDisplay (uint8_t numero_display, uint8_t valor);
-void mostra (uint16_t valor);
+#define SEGA PIN(0,4)
+#define SEGB PIN(0,5)
+#define SEGC PIN(0,6)
+#define SEGD PIN(0,7)
+#define SEGE PIN(0,8)
+#define SEGF PIN(0,9)
+#define SEGG PIN(0,10)
+#define DISPLAY0 PIN(3,25)
+#define DISPLAY1 PIN(3,26)
+#define DISPLAY2 PIN(4,28)
+#define DISPLAY3 PIN(4,29)
+
+void seg_init (void);
+void seg_apresenta (uint16_t valor);
 
 
 #endif
