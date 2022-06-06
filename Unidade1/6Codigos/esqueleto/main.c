@@ -29,12 +29,14 @@ int main() {
   delay_init();
   seg_init( );
    
-  
+  uint16_t x;
+  delay_ms(1000);
   for (uint16_t v=0;v<9999;v++)
   {
-  	seg_apresenta(v);
-  	delay_ms(2000);
-  	printf("%d\n",v);
+  	printf("Entre com o numero \n");
+  	scanf("%d",&x);
+  	seg_apresenta(x);
+  	
   }
   while(1){}
  
