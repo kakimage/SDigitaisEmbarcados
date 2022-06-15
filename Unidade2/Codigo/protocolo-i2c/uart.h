@@ -30,11 +30,11 @@
 #define _UART_H_
 #include <stddef.h>
 
-extern "C"
-int _write (int fd, const void *buf, size_t count);
 
-extern "C"
-int _read (int fd, const void *buf, size_t count);
+extern int _write (int fd, const void *buf, size_t count);
+
+
+extern int _read (int fd, const void *buf, size_t count);
 
 // ***********************
 // Function to set up UART

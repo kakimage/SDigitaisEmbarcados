@@ -65,8 +65,7 @@
 #define LSR_RXFE	0x80
 
 
-extern "C"
-int _write (int fd, const void *buf, size_t count)
+ extern  int _write (int fd, const void *buf, size_t count)
 {
 	uint8_t x;
 	char *vet = (char *) buf;
@@ -74,8 +73,7 @@ int _write (int fd, const void *buf, size_t count)
 	for (x=0;x<count;x++) UART0_Sendchar(  vet[x]);
 	return count;
 }
- extern "C"
-int _read (int fd, const void *buf, size_t count)
+ extern int _read (int fd, const void *buf, size_t count)
 {
 	uint8_t contador=0;
 	char *vet = (char *) buf;

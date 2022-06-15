@@ -3,10 +3,10 @@
 
 volatile unsigned long sysTickCounter;
 
-extern "C" 
+
 void SysTick_Handler (void);
 
-extern "C" 
+
 void SysTick_Handler(void) {
 	if (sysTickCounter != 0x00) sysTickCounter--;
 }

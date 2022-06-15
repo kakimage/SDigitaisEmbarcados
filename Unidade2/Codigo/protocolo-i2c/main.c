@@ -4,12 +4,13 @@
 //                    make flash
 
 
+
 #ifdef _USA_ARM_
 
 #include <stdio.h>
 #include <string.h>
 #include <inttypes.h>
-#include "memoria.h"
+
 #include "src/LPC17xx.h"
 #include "delay.h"
 #include "digital.h"
@@ -18,40 +19,32 @@
 #else
 #include <stdio.h>
 #include <string.h>
-#include <inttypes.h>
-#include "SA.h"
 #endif
 
+
+#include "memoria.h"
 int main ( void ) 
 {
-	char vetor[]={"UFSC2018"};
-	char buffer[20];
-	
+	char vetor[]={"UFSC2022 - Eng. de computacao"};
+	char buffer[30];
+
+	memoria_init();	
 #ifdef _USA_ARM_
 	SystemInit();
 	UART0_Init(9600);
+
 #endif
+	printf("Funcionando\n");
 	
-	int x=4, y=0;
-
-
-	SA_format();
-	SA_FILE *A;
-
-	SA_fopen ("teste","w");
-	SA_fwrite();
+	memoria_write(0, 20,  (uint8_t *)vetor, strlen(vetor));
 	
-	printf("Rodando\n");
-	printf("divide=%d",x/y);
-		uint8_t ack,dado=0;
+	memoria_read (0, 20, (uint8_t *)buffer, strlen(vetor));
 
-
-	memoria_write(0, 20,  (uint8_t *)vetor, 8);
-	memoria_read (0, 20, (uint8_t *)buffer, 8);
-
-	buffer[8]=0;
+	buffer[strlen(vetor)]=0;
 	printf("%s\n",buffer);
 
+	
+	memoria_flush();
 	while(1){
 		
 	}

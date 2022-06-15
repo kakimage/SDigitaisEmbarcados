@@ -36,36 +36,32 @@ $(PROJECT).elf: $(BASICOS)  $(MEUPROJETO)
 	# ****************************************************************
 
 
-
-
-
-
-main.o:	main.cpp
+main.o:	main.c
 	# *************************** main *****************************
-	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu++98 main.cpp -c
+	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu99 main.c -c
 	# **************************************************************
 
-memoria.o:  memoria.h i2c_software.o memoria.cpp
-	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu++98 memoria.cpp -c
+memoria.o:  memoria.h i2c_software.o memoria.c
+	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu99 memoria.c -c
 
-i2c_software.o:	i2c_software.cpp i2c_software.h digital.h delay.o
+i2c_software.o:	i2c_software.c i2c_software.h digital.h delay.o
 	# *************************** main *****************************
-	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu++98 i2c_software.cpp -c
+	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu99 i2c_software.c -c
 	# **************************************************************
 
-digital.o:	digital.cpp digital.h
+digital.o:	digital.c digital.h
 	# *************************** main *****************************
-	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu++98 digital.cpp -c
+	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu99 digital.c -c
 	# **************************************************************
 
-uart.o:	uart.cpp uart.h
+uart.o:	uart.c uart.h
 	# *************************** main *****************************
-	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu++98 uart.cpp -c
+	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu99 uart.c -c
 	# **
 
-delay.o:	delay.cpp delay.h
+delay.o:	delay.c delay.h
 	# *************************** main *****************************
-	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu++98 delay.cpp -c
+	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -std=gnu99 delay.c -c
 	# **************************************************************
 
 
