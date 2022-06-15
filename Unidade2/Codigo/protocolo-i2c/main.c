@@ -38,9 +38,9 @@ int main ( void )
 	
 	memoria_write(0, 20,  (uint8_t *)vetor, strlen(vetor));
 	
-	memoria_read (0, 20, (uint8_t *)buffer, strlen(vetor));
+	memoria_read (0, 31, (uint8_t *)buffer, 18);
 
-	buffer[strlen(vetor)]=0;
+	buffer[18]=0;
 	printf("%s\n",buffer);
 
 	

@@ -19,11 +19,6 @@ $(PROJECT).exe: $(MEUPROJETO)
 	gcc main.o memoria.o -o $(PROJECT).exe
 	
 
-
-
-
-
-
 main.o:	main.c
 	# *************************** main *****************************
 	$(CC) $(CC_FLAGS)  -std=gnu99 main.c -c

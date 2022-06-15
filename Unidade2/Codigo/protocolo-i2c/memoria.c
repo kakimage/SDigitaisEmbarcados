@@ -16,7 +16,6 @@ void memoria_init (void)
 uint16_t memoria_write (uint8_t dispositivo, uint16_t end, uint8_t b[], uint16_t tam)
 {
 	
-		// TODO
 	uint16_t R, qtd,  contador=0;
 
 	while (tam>0)
