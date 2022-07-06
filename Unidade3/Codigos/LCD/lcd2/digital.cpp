@@ -1,7 +1,6 @@
 
 #include "digital.h"
 
-#ifdef PLATFORM_ARM
 
 
 LPC_GPIO_TypeDef      * vet[5]={LPC_GPIO0,LPC_GPIO1,LPC_GPIO2,LPC_GPIO3,LPC_GPIO4};
@@ -9,6 +8,8 @@ LPC_GPIO_TypeDef      * vet[5]={LPC_GPIO0,LPC_GPIO1,LPC_GPIO2,LPC_GPIO3,LPC_GPIO
 
 void pinMode (uint8_t pb, uint8_t tipo)
 {
+
+	
 	uint8_t porta = pb >> 5;
 	uint8_t bit = pb & 31;
 	if (tipo == OUTPUT) vet[porta]->FIODIR |= (1 << bit);
@@ -37,8 +38,6 @@ uint8_t digitalRead (uint8_t pb)
 
 
 
-#elif  defined PLATFORM_ARDUINO
 
 
 
-#endif

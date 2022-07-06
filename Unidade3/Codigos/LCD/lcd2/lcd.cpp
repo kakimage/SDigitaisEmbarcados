@@ -1,7 +1,11 @@
 #include "lcd.h"
+#include "digital.h"
+#include "delay.h"
 
 void lcd_dado (uint8_t d)
 {
+
+	
 	digitalWrite(RS,HIGH);
 	digitalWrite(D0, d & 1);
 	digitalWrite(D1, (d>>1) & 1);
@@ -12,9 +16,9 @@ void lcd_dado (uint8_t d)
 	digitalWrite(D6, (d>>6) & 1);
 	digitalWrite(D7, (d>>7) & 1);
 	digitalWrite(E, HIGH);
-	delay_ms(40);
+	delay_ms(4);
 	digitalWrite(E, LOW);
-	
+	delay_ms(10);
 	
 }
 void lcd_comando (uint8_t d)
@@ -37,12 +41,26 @@ void lcd_comando (uint8_t d)
 void lcd_init (void)
 {
     delay_ms(500);
+    pinMode(D0,OUTPUT);
+    pinMode(D1,OUTPUT);
+    pinMode(D2,OUTPUT);
+    pinMode(D3,OUTPUT);
+    pinMode(D4,OUTPUT);
+    pinMode(D5,OUTPUT);
+    pinMode(D6,OUTPUT);
+    pinMode(D7,OUTPUT);
+    pinMode(RS,OUTPUT);
+    pinMode(E,OUTPUT);
+
+    digitalWrite(E,  LOW);
+        delay_ms(40);
+    
     lcd_comando (0x38);
     lcd_comando (0x01);
     lcd_comando (0x0F);  	
 }
 
-void lcd_msg( char *s)
+void lcd_msg( const char *s)
 {
 	int x=0;
 	while (s[x]!=0)
