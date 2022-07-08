@@ -22,7 +22,7 @@ int main() {
   SystemInit();
 
   lcd_init();
-  lcd_msg("oi mundo");
+  lcd_msg("oi mundo 123 456 789");
  for(;;) {
     
   }

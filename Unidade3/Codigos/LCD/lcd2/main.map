@@ -215,7 +215,7 @@ END GROUP
 LOAD /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtend.o
 LOAD /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
 
-.text           0x0000000000000000      0x874
+.text           0x0000000000000000      0x880
  *(.isr_vector)
  .isr_vector    0x0000000000000000       0xc4 build/startup_LPC17xx.o
                 0x0000000000000000                g_pfnVectors
@@ -332,43 +332,43 @@ LOAD /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
  *(SORT_BY_NAME(.dtors.*))
  *(.dtors)
  *(.rodata*)
- .rodata        0x0000000000000860        0x9 build/testa_lcd.o
- *fill*         0x0000000000000869        0x3 
- .rodata        0x000000000000086c        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-impure.o)
-                0x000000000000086c                _global_impure_ptr
+ .rodata        0x0000000000000860       0x15 build/testa_lcd.o
+ *fill*         0x0000000000000875        0x3 
+ .rodata        0x0000000000000878        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-impure.o)
+                0x0000000000000878                _global_impure_ptr
  *(.eh_frame*)
- .eh_frame      0x0000000000000870        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
- .eh_frame      0x0000000000000870        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtend.o
+ .eh_frame      0x000000000000087c        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
+ .eh_frame      0x000000000000087c        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtend.o
 
-.glue_7         0x0000000000000874        0x0
- .glue_7        0x0000000000000874        0x0 linker stubs
+.glue_7         0x0000000000000880        0x0
+ .glue_7        0x0000000000000880        0x0 linker stubs
 
-.glue_7t        0x0000000000000874        0x0
- .glue_7t       0x0000000000000874        0x0 linker stubs
+.glue_7t        0x0000000000000880        0x0
+ .glue_7t       0x0000000000000880        0x0 linker stubs
 
-.vfp11_veneer   0x0000000000000874        0x0
- .vfp11_veneer  0x0000000000000874        0x0 linker stubs
+.vfp11_veneer   0x0000000000000880        0x0
+ .vfp11_veneer  0x0000000000000880        0x0 linker stubs
 
-.v4_bx          0x0000000000000874        0x0
- .v4_bx         0x0000000000000874        0x0 linker stubs
+.v4_bx          0x0000000000000880        0x0
+ .v4_bx         0x0000000000000880        0x0 linker stubs
 
-.iplt           0x0000000000000874        0x0
- .iplt          0x0000000000000874        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
+.iplt           0x0000000000000880        0x0
+ .iplt          0x0000000000000880        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
 
-.rel.dyn        0x0000000000000874        0x0
- .rel.iplt      0x0000000000000874        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
+.rel.dyn        0x0000000000000880        0x0
+ .rel.iplt      0x0000000000000880        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x0000000000000874                __exidx_start = .
+                0x0000000000000880                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x0000000000000874                __exidx_end = .
-                0x0000000000000874                __etext = .
-                0x0000000000000874                __sidata = __etext
+                0x0000000000000880                __exidx_end = .
+                0x0000000000000880                __etext = .
+                0x0000000000000880                __sidata = __etext
 
-.data           0x00000000100000c8      0x454 load address 0x0000000000000874
+.data           0x00000000100000c8      0x454 load address 0x0000000000000880
                 0x00000000100000c8                __data_start__ = .
  *(vtable)
  *(.data*)
@@ -401,20 +401,20 @@ LOAD /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
                 0x000000001000051c                __data_end__ = .
 
 .tm_clone_table
-                0x000000001000051c        0x0 load address 0x0000000000000cc8
+                0x000000001000051c        0x0 load address 0x0000000000000cd4
  .tm_clone_table
                 0x000000001000051c        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
  .tm_clone_table
                 0x000000001000051c        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtend.o
 
-.igot.plt       0x000000001000051c        0x0 load address 0x0000000000000cc8
+.igot.plt       0x000000001000051c        0x0 load address 0x0000000000000cd4
  .igot.plt      0x000000001000051c        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
 
-.stackarea      0x000000001000051c      0x800 load address 0x0000000000000cc8
+.stackarea      0x000000001000051c      0x800 load address 0x0000000000000cd4
  .stackarea     0x000000001000051c      0x800 build/startup_LPC17xx.o
                 0x000000001000051c                pulStack
 
-.bss            0x0000000010000d1c       0x20 load address 0x00000000000014c8
+.bss            0x0000000010000d1c       0x20 load address 0x00000000000014d4
                 0x0000000010000d1c                __bss_start__ = .
  *(.bss*)
  .bss           0x0000000010000d1c       0x1c /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
