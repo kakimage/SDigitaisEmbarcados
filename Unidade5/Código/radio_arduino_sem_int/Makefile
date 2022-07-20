@@ -49,4 +49,4 @@ uploadr:
 	${UPLOADER} -F -V -v -c arduino -p ATMEGA328P -P /dev/ttyACM0 -b 115200  -U flash:w:testaR_nrf24.hex
 
 uploadt:
-	${UPLOADER} -F -V -v -c arduino -p ATMEGA328P -P /dev/ttyACM0 -b 115200  -U flash:w:testaT_nrf24.hex
+	${UPLOADER} -F -V -v -c arduino -p ATMEGA328P -P /dev/ttyACM1 -b 115200  -U flash:w:testaT_nrf24.hex

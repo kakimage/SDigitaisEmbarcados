@@ -31,7 +31,6 @@ class RADIO {
 		void leRegistrador(uint8_t reg, uint8_t buffer[], uint8_t tam);
 		void carregaMensagem(uint8_t buffer[], int tam);
 	public:
-		uint8_t testa(void);
 		void configura (void);
 		void modoRX();
 		void modoTX();

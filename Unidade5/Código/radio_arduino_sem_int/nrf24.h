@@ -2,7 +2,7 @@
 #define _NRF24_
 #include <inttypes.h>
 
-#define TAMANHO_MSG 8
+#define TAMANHO_MSG 32
 // COMANDOS
 #define FLUSH_TX     0xE1
 #define FLUSH_RX      0xE2
@@ -23,6 +23,9 @@
 #define TX_ADDR    0x10
 #define RX_PW_P0   0x11
 #define EN_RXADDR  0x02
+#define FEATURE    0x1D
+#define DYNPD      0x1C
+#define EN_RX_ADDR 0x02
 
 
 #define MASK_RX_DR  6

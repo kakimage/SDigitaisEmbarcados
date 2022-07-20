@@ -25,7 +25,7 @@
 
 int main ( void ) 
 {
-	uint8_t buffer[20];
+	uint8_t buffer[50];
 	uart_init();
 
 	nrf24_init();

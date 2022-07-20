@@ -7,7 +7,8 @@
 #endif
 
 #ifndef BAUD
-#define BAUD 9600
+#define BAUD 115200
+#define USE_2X
 #endif
 #include <util/setbaud.h>
 
@@ -20,6 +21,7 @@ void uart_init(void) {
     UBRR0L = UBRRL_VALUE;
     stdout = &uart_output;
     stdin  = &uart_input;
+    
     
 #if USE_2X
     UCSR0A |= _BV(U2X0);

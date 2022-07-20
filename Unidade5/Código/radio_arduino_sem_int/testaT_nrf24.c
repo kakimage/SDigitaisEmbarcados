@@ -39,7 +39,7 @@ int main ( void )
 	{
 		sprintf((char *)buffer, "oi %d",x);
 	    nrf24_transmite(buffer); x++;
-		delay_ms(1000);
+		
 		
 	}
 

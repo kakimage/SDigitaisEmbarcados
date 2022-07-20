@@ -3,7 +3,7 @@
 #include "spi.h"
 #include "delay.h"
 #include <avr/interrupt.h>
-
+#include <stdio.h>
 void modo_RX(void);
 void modo_TX(void);
 void nrf24_flush_TX (void);
@@ -55,10 +55,19 @@ void nrf24_init (void)
 
 	limpa_FIFO();	
 	
+	
+		parametros[0] = 0;
+    nrf24_escreve_registrador (DYNPD, 1, parametros);
+    
+    		parametros[0] = 1;
+        nrf24_escreve_registrador (EN_RX_ADDR, 1, parametros);
+
+    
 	parametros[0] = 0x01;
     nrf24_escreve_registrador (EN_RXADDR, 1, parametros);
 
-	
+	parametros[0] = 0;
+    nrf24_escreve_registrador (FEATURE, 1, parametros);
     
 	parametros[0] = 0x00;
     nrf24_escreve_registrador (EN_AA, 1, parametros);
@@ -68,14 +77,14 @@ void nrf24_init (void)
 	
 	
 
-	parametros[0] = 0x01;
+	parametros[0] = 0x6E;
     nrf24_escreve_registrador (RF_CH, 1, parametros);
 
 
 	parametros[0]=0;
 	nrf24_escreve_registrador (SETUP_RETR, 1, parametros);
 
-	parametros[0] = 0x27;
+	parametros[0] = 0x07;
     nrf24_escreve_registrador (RF_SETUP, 1, parametros);
 
 	parametros[0] = 1;
@@ -95,11 +104,13 @@ void nrf24_init (void)
 
 	parametros[0] = 0x77;
     nrf24_escreve_registrador (CONFIG, 1, parametros);
+    
+    
 	
 	parametros[0]=0x11;
 	nrf24_escreve_registrador (FIFO_STATUS, 1, parametros);
 
-	
+		limpa_FIFO();	
 
 }
 
@@ -112,6 +123,10 @@ void nrf24_transmite(uint8_t buffer[])
 		spi_write(FLUSH_TX);
 	spi_desabilita();
 
+	uint8_t crc = 0xff;
+	
+	for (x=0;x<TAMANHO_MSG-1;x++)	crc=crc+buffer[x];
+	buffer[TAMANHO_MSG-1]=crc;
 	spi_habilita();
 		spi_write(W_TX_PAYLOAD);
 		for (x=0;x<TAMANHO_MSG;x++)	spi_write(buffer[x]);
@@ -126,7 +141,7 @@ void nrf24_transmite(uint8_t buffer[])
 	status = le_registrador(STATUS); 
 	status = (status | (1<<5));
 	nrf24_escreve_registrador(STATUS,1,(uint8_t *)&status);
-	_delay_ms(10);
+	//_delay_ms(10);
 	modo_RX();
 	
 
@@ -141,7 +156,7 @@ void reset (void)
 	_delay_us(10);
 	spi_habilita();
 	_delay_us(10);
-	spi_write(W_REGISTER+STATUS);
+	spi_write(W_REGISTER|STATUS);
 	_delay_us(10);
 	spi_write(0x70);
 	_delay_us(10);
@@ -196,24 +211,31 @@ void nrf24_recebe(uint8_t buffer[])
 {
 	uint8_t x,valor;
 
-	CE_HIGH();
 
-	while  (  (le_registrador(STATUS) & (1<<6)) ==0);
+	while (1){
+		CE_HIGH();
 
-	spi_habilita();
-		spi_write(R_RX_PAYLOAD);
-		for (x=0;x<TAMANHO_MSG;x++) buffer[x] = spi_write(0xff);	
-	spi_desabilita();
-	spi_habilita();
-		spi_write(FLUSH_RX);
-	spi_desabilita();
+		while  (  (le_registrador(STATUS) & (1<<6)) ==0);
+		CE_LOW();
+		spi_habilita();
+			spi_write(R_RX_PAYLOAD);
+			for (x=0;x<TAMANHO_MSG;x++) buffer[x] = spi_write(0xff);	
+		spi_desabilita();
+		spi_habilita();
+			spi_write(FLUSH_RX);
+		spi_desabilita();
 	
-	// limpa o flag de recepcao de pacote
-	valor=le_registrador(STATUS);
-	valor = valor | (1<<6);
-	nrf24_escreve_registrador (STATUS, 1, &valor);
+		// limpa o flag de recepcao de pacote
+		valor=le_registrador(STATUS);
+		valor = valor | (1<<6);
+		nrf24_escreve_registrador (STATUS, 1, &valor);
+			CE_HIGH();
+		uint8_t crc = 0xff;
+		for (x=0;x<TAMANHO_MSG-1;x++)	crc=crc+buffer[x];
+		if (crc==buffer[TAMANHO_MSG-1]) return;
+
+	}
 	
-	return;				
 }
 void nrf24_le_registrador (uint8_t reg, uint8_t qtd, uint8_t vet[])
 {
